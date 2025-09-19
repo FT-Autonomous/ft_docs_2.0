@@ -1,0 +1,117 @@
+
+site_name: "Formula Trinity Autonomous Wiki"
+site_url: "https://docs.formulatrinity.ie"
+
+theme:
+  name: material
+#   logo: images/logo.png
+  features:
+    # - navigation.expand
+    - navigation.sections
+    - content.code.copy
+    - content.code.annotate
+    - search.suggest
+    - search.highlight
+    - search.share
+    - toc.follow
+  palette:
+    scheme: ft-dark
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - footnotes
+  - pymdownx.details
+  - pymdownx.superfences
+  - md_in_html 
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra_javascript:
+  - javascripts/mathjax.js
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+plugins:
+  - search
+
+nav: # This is the structure of the sidebar
+  - Home: index.md
+
+  - Departments:
+      - Perception:
+            - Overview: departments/perception/overview.md
+            - Theory: departments/perception/theory.md
+      - State Estimation:
+            - Overview: departments/state_estimation/overview.md
+            - Theory: departments/state_estimation/theory.md
+      - Path Planning:
+            - Overview: departments/path_planning/overview.md
+            - Theory: departments/path_planning/theory.md
+      - Control:
+            - Overview: departments/control/overview.md
+            - Theory: departments/control/theory.md
+            - Pure Pursuit: departments/control/pure_pursuit.md
+            - Pure Pursuit Callback: departments/control/pure_pur_callback.md
+            - Velocity Control: departments/control/velocity_control.md
+            - PID Tuning: departments/control/pid_tuning.md
+      - Hardware:
+            - Overview: departments/hardware/overview.md
+            - Theory: departments/hardware/theory.md
+  - Resources:
+      - General Competition Info: resources/competition.md
+      - General Git Info: resources/git.md
+      - General SSH Resources: resources/ssh.md
+      - General ROS2 Resources: resources/ros2.md
+      - General Python Resources: resources/python.md
+      - General C++ Resources: resources/cpp.md
+      - General Linux Resources: resources/linux.md
+      - The ROS2 Visualization Stack RVIZ2: resources/rviz2.md
+      - The ROS2 Transforms Library (TF2): resources/tf2.md
+      - EUFS Sim: resources/eufs_sim.md
+      - IPG CarMaker: resources/ipg_carmaker.md
+      - Ros Can: resources/ros_can.md
+      - Why the F*ck is The Car Not Moving: resources/why_is_car_not_moving.md
+      - Other Relevant Sites: resources/relevant.md
+
+  - Tutorials:
+      - Getting Started Guide: tutorials/Getting_started.md
+      - Cutting Bags Down to Size: tutorials/cutting_bags.md
+      - Competition Launch Scripts; Configuration, Setup and Running them: tutorials/comp_launch_scripts.md
+      - Reducing Boot Time: tutorials/reducing_boot_time.md
+      - Running Code on Linux that are not Ubuntu: tutorials/run_code_not_ubuntu.md
+      - Path Planning Tutorial (Getting Started on ROS) (Kind of Deprecated): tutorials/path_planning_tutorial.md
+      - How to SSH into the FTA Pc: tutorials/ssh_to_fta_pc.md
+      - C++ to Python: tutorials/cpp_to_python.md
+      - LiDAR Setup: tutorials/lidar_setup.md
+      - YOLO Training: tutorials/yolo_training.md
+      - Webpage Setup: tutorials/webpage_setup.md
+
+  - Equipment:
+      - ADS-DV Vehicle: equipment/ads_dv.md
+      - Jetson Orin: equipment/jetson_orin.md
+      - Velodyne LiDAR: equipment/velodyne.md
+      - ZED2 Camera: equipment/zed2.md
+      - Jetson Nano: equipment/jetson_nano.md
+      - Livox Avia: equipment/livox_avia.md    
+
+  - Software Stack:
+      - Time Synchronization: Software Stack/Time_sync.md
+
+  - Guidelines:
+      - Coding: guidelines/coding.md
+      - Documentation: guidelines/documentation.md
+      - Development Best Practices: guidelines/development_best_practices.md
+      - Troubleshooting: guidelines/troubleshooting.md
+
+  - Miscellaneous:
+      - Feedback: miscellaneous/feedback.md
+
+extra_css:
+  - overrides/styles.css
+

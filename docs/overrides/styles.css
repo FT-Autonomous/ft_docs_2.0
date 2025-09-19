@@ -1,0 +1,35 @@
+/* Left sidebar section headings (e.g., Departments, Tutorials, Equipment) */
+.md-sidebar--primary .md-nav__title,
+.md-sidebar--primary .md-nav__item--section > label.md-nav__link {
+  font-weight: 800;          /* bolder */
+  font-size: 1.05rem;        /* bigger; tweak 0.95–1.15 as you like */
+  letter-spacing: .02em;
+  color: var(--md-default-fg-color);
+  opacity: .95;
+}
+
+/* Optional: add a little spacing above each section block */
+.md-sidebar--primary .md-nav__item--section {
+  margin-top: .6rem;
+}
+
+/* Optional: subtle divider above the heading */
+.md-sidebar--primary .md-nav__item--section > label.md-nav__link {
+  padding-top: .35rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+}
+
+/* Keep normal links (child pages) unchanged */
+.md-sidebar--primary .md-nav__item .md-nav__link:not(label.md-nav__link) {
+  font-weight: 400;
+  border: 0;
+}
+
+/* "Table of contents" heading (right sidebar) */
+.md-sidebar--secondary .md-nav__title {
+  font-weight: 800;       /* bold */
+  font-size: 1.05rem;     /* a touch bigger; tweak as you like */
+  letter-spacing: .02em;
+  color: var(--md-default-fg-color);
+  opacity: .95;
+}
