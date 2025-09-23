@@ -171,6 +171,11 @@ nav:
   [External site](https://eufs.eu){ target=_blank rel=noopener }
   ~~~
 
+- Inside shown links
+  ~~~md
+  <link>
+  ~~~
+
 ### B) Images
 
 Put images in `docs/media/` and use **relative** paths:

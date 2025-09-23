@@ -10,6 +10,7 @@ theme:
     logo: null     # <- prevent book icon fallback
 
   features:
+    - navigation.top
     - navigation.expand
     - navigation.sections
     - navigation.footer  
