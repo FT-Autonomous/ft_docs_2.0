@@ -15,7 +15,20 @@ theme:
     - search.share
     - toc.follow
   palette:
-    scheme: ft-dark
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    primary: red         # pick your color
+    accent: red
+    toggle:
+      icon: material/weather-night
+      name: Switch to dark mode
+  - media: "(prefers-color-scheme: dark)"
+    scheme: slate
+    primary: red
+    accent: red
+    toggle:
+      icon: material/weather-sunny
+      name: Switch to light mode
 
 markdown_extensions:
   - admonition
@@ -42,7 +55,7 @@ plugins:
 
 nav: # This is the structure of the sidebar
   - Home: index.md
-
+  - Hall of Fame: hall_of_fame.md
   - Departments:
       - Perception:
             - Overview: departments/perception/overview.md
