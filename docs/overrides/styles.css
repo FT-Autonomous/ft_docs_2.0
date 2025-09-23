@@ -67,3 +67,19 @@
   display: block;
 }
 
+/* Keep header logo a sane size on all screens */
+.md-header__button.md-logo img {
+  height: 1.25rem;   /* tweak: 1.0–1.6rem */
+  width: auto;
+  display: block;
+}
+
+/* Optional: a bit of breathing room around the logo */
+.md-header__button.md-logo {
+  padding: .2rem .4rem;
+}
+
+/* Optional: slightly larger on wide screens */
+@media (min-width: 960px) {
+  .md-header__button.md-logo img { height: 1.4rem; }
+}

@@ -4,16 +4,24 @@ site_url: "https://docs.formulatrinity.ie"
 
 theme:
   name: material
-#   logo: images/logo.png
+  logo: media/FT_Logo.png
+  favicon: media/FT_Logo.png
+  icon:
+    logo: null     # <- prevent book icon fallback
+
   features:
-    # - navigation.expand
+    - navigation.expand
     - navigation.sections
+    - navigation.footer  
     - content.code.copy
     - content.code.annotate
     - search.suggest
     - search.highlight
     - search.share
     - toc.follow
+
+  # custom_dir: docs/overrides
+
   palette:
   - media: "(prefers-color-scheme: light)"
     scheme: default
