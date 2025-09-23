@@ -126,8 +126,8 @@ Photos are shown first for **Captains & CTOs** (or **Founders** in 2019), then *
 <div class="hof-grid">
 
 <figure>
-  <img src="media/hof/2022-captain.jpg" alt="2022 Captain" loading="lazy">
-  <figcaption><strong>Firstname Lastname</strong><br>Team Captain</figcaption>
+  <img src="../media/hof/2022-23-Emran-Moustafa.jpg" alt="2022 Captain" loading="lazy">
+  <figcaption><strong>Emran Moustafa</strong><br>Team Captain</figcaption>
 </figure>
 
 <figure>
