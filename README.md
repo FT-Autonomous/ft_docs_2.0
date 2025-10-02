@@ -22,4 +22,6 @@ Each Folder has its own media folder where all the images/videos are kept.
 
 ## How to update the docs
 
+(MAKE SURE TO GIT PULL BEFORE DOING ANYTHING)
+
 Once you make a document in any of the folders or make a new folder, make sure to reference them in the mkdocs.yml file as only then you will be able to see it locally or live through github once you push.
