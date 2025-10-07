@@ -194,8 +194,8 @@ Photos are shown first for **Captains & CTOs** (or **Founders** in 2019), then *
 <div class="hof-grid">
 
 <figure>
-  <img src="media/hof/2024-captain.jpg" alt="2024 Captain" loading="lazy">
-  <figcaption><strong>Firstname Lastname</strong><br>Team Captain</figcaption>
+  <img src="../media/hof/2024-25-Cleavon-Castelino.jpg" alt="2024 Captain" loading="lazy" style="object-position: 50% 10%;">
+  <figcaption><strong>Cleavon Castelino</strong><br>Team Captain</figcaption>
 </figure>
 
 <figure>

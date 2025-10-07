@@ -69,6 +69,7 @@ nav: # This is the structure of the sidebar
       - Perception:
             - Overview: departments/perception/overview.md
             - Theory: departments/perception/theory.md
+            - Calibration: departments/perception/calibration.md
       - State Estimation:
             - Overview: departments/state_estimation/overview.md
             - Theory: departments/state_estimation/theory.md
