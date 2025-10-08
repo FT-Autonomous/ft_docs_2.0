@@ -10,4 +10,6 @@ Welcome to the Formula Trinity documentation hub — everything from departments
 
 - How to write out a documentation website with all of its functionality in markdown: [Webpage Setup](tutorials/webpage_setup.md)
 
+!!!note
+    Quick note on search, Everytime you open the docs website always press Cntrl/Cmd + shift + R. This will help refresh the cache for the website to ensure that the search functionality is always on top of all the files when its pushed to docs repo in github.
 
