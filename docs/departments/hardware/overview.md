@@ -12,11 +12,11 @@ Hardware is the newest department to FT Autonomouts (as of Septermber 2025) and 
 #### Electronics
 - Implement potentiometer based control loop for steering system.
 - Finalise and implement communication protocols for Jetson to Jetson, and Jetson to Arduino communtications.
-- Integrate independant power supply for drive and steering motors onto rigby
+- Integrate independant power supply for drive and steering motors onto rigby.
 #### Mechanical
 - mount poteentiometer to Rigby for control of steering.
-- Add a more permanant weatherproofing solution to the sensor mount
-- Add mounting plate to Rigby, to give more space for onboard electronics and morot power supply
+- Add a more permanant weatherproofing solution to the sensor mount.
+- Add mounting plate to Rigby, to give more space for onboard electronics and morot power supply.
 
 ## Previous Implementations
 
