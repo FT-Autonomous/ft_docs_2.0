@@ -87,7 +87,8 @@ nav: # This is the structure of the sidebar
             - PID Tuning: departments/control/pid_tuning.md
       - Hardware:
             - Overview: departments/hardware/overview.md
-            - Theory: departments/hardware/theory.md
+            - Electronics: departments/hardware/electronics.md
+	    - Mechanical: departments/hardware/mechanical.md
   - Resources:
       - General Competition Info: resources/competition.md
       - General Git Info: resources/git.md
