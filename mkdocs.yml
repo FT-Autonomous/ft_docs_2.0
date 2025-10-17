@@ -8,7 +8,6 @@ theme:
   favicon: media/FT_Logo.png
   icon:
     logo: null     # <- prevent book icon fallback
-
   features:
     - navigation.top
     - navigation.expand
@@ -20,6 +19,7 @@ theme:
     - search.highlight
     - search.share
     - toc.follow
+    - content.status
 
   # custom_dir: docs/overrides
 
@@ -61,6 +61,13 @@ extra_javascript:
 
 plugins:
   - search
+  - git-revision-date-localized:
+      enable_creation_date: true
+      fallback_to_build_date: true
+      type: custom            # timeago | date | datetime | iso_date | iso_datetime | custom
+      custom_format: "%b %d, %Y"   # e.g. "Oct 17, 2025"
+      timezone: Europe/Dublin
+      locale: en
 
 nav: # This is the structure of the sidebar
   - Home: index.md
