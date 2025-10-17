@@ -1,0 +1,12 @@
+# MkDocs core + theme
+mkdocs>=1.5
+mkdocs-material>=9.5
+
+# Plugin for "Last updated" dates
+mkdocs-git-revision-date-localized-plugin>=1.2
+
+# Markdown extras used in your mkdocs.yml (pymdownx.*)
+pymdown-extensions>=10.8
+
+# (Optional) extra material extensions; usually pulled in by mkdocs-material anyway
+mkdocs-material-extensions>=1.3
