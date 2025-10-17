@@ -61,6 +61,7 @@ extra_javascript:
 
 plugins:
   - search
+  - glightbox
   - git-revision-date-localized:
       enable_creation_date: true
       fallback_to_build_date: true
@@ -68,6 +69,7 @@ plugins:
       custom_format: "%b %d, %Y"   # e.g. "Oct 17, 2025"
       timezone: Europe/Dublin
       locale: en
+    
 
 nav: # This is the structure of the sidebar
   - Home: index.md
