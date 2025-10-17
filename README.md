@@ -6,7 +6,7 @@ MkDocs + Material theme. Write pages in Markdown, preview locally, and auto-depl
 
 Install tooling
 ```
-pip install mkdocs mkdocs-material
+pip install -r requirements.txt
 ```
 
 Run locally
