@@ -23,4 +23,4 @@ The primary objectives of the Perception module in FSAI are:
 - Cone Detection: Identify cones on the track using data from LiDAR and cameras.
 - Cone Classification: Determine the color of each cone, which is critical for understanding the track's layout.
 - Cone Localization: Calculate the precise 3D position of each cone relative to the vehicle.
-- Real-Time Perormance: Process data quickly to ensure the cehicel can react to dynamic changes in the environment.
+- Real-Time Perormance: Process data quickly to ensure the vehicle can react to dynamic changes in the environment.
