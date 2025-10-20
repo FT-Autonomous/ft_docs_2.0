@@ -5,12 +5,16 @@
 * The judges love redundancies.
 * The safey chart/Risk Assessment is very important
   * Need to include Grip of tires
+* Prepare for if we have unlimited budget, what would we get.
+* Submit all doucments in time to avoid penalitys/Reduction in points.
 
 
 
 ## Design:
 
 ### 2024-2025 Feedback
+
+**(Second Place, Presentation)**
 
 #### Overall Concept:
 
@@ -50,7 +54,7 @@
 - Good: Excellent chart showing functional safety plan
 - To improve on: Add failure mitigation solution if a failure happens (current chart was showing how to prevent/fix solution)
   
-### Bruno’s comments on Design:
+#### Bruno’s comments on Design:
 
 One of the slides noted that in 2024, there was a lack of clearly validated improvements or metrics. In 2025, the team said this was addressed by documenting perception and control performance using quantitative metrics however nothing was shown in the slides. The presentation would be strengthened by comparing the current and previous software architectures, highlighting specific improvements, optimizations, or lessons learned. Demonstrating measurable gains in performance or reliability would make the evolution clearer.
 
@@ -82,9 +86,11 @@ Adding explicit failure mitigation strategies—detailing what happens if a sens
 | Vehicle Control: | Good: Justified decision to use Pure Pursuit model | To improve on: Could take into account vehicle physics if not following command -> Vehicle skidding -> Stop |
 | Functional Safety: | Good: Excellent chart showing functional safety plan | To improve on: Add failure mitigation solution if a failure happens (current chart was showing how to prevent/fix solution) |
 
-**Second Place, Presentaion**
+
 
 ### 2023-2024 Feedback
+
+**(Award Winning Presentation)**
 
 - Do you have any weightings on each of those different areas (slide 8)?
 - Slide 8 Perception Diagram: Lots of questions related to this slide!
@@ -110,7 +116,45 @@ decreased significantly. There was one judge who would take photos of some of th
 we went along. Example: the full system slide, the state machine events logic slide… Note:
 judges asked follow-up questions from what was mentioned in answers to questions.
 
-**Award Winning Presentation**
+### 2022-2023 Feedback
+
+#### From Harold:
+
+* Make progress with complexities, validation of achievement, robustness & reliability of systems. 
+* Set goals 
+* Clear link of what we wanted to do and what we ended up with
+* Clear communication - we were good
+* A lot more around the sensors - review options and how we made our choice. 
+  * Essentially a justification doesn’t matter if budget is a concern
+  * Do the sensors give us the performance we’re looking for 
+* Data to back up our reasoning of what algorithms we’re using 
+* Functional safety was missing
+  * If the steering fails for example what happens to the system 
+* Points are not awarded for complexity of the design 
+
+#### From Holly:
+
+* Overall Concepts
+  * Good Idea to start with a simpler design and scale up
+  * Have good fallbacks
+* How do we validate what we achieved? What metrics?
+* Have we met or not met our goals? Collect evidence as to how we improve and what we need to improve
+* Link what we wanted to do with what we ended with
+* Fantastic Presentation Skills
+  * Storytelling
+  * Some teams have good content but bad communication
+* More ground sensors
+  * Review of some options we could use
+  * Understand budget is restricted 
+  * Review what sensors we could use and why we would use them? Why didn’t we use them
+  * Quantify this with data…
+* Localisation, Path planning and control
+  * Why did we use these? Why not others? Data to back it up
+  * Follow that process with every slide for success
+* Consistency rather than speed is good
+* Bad with functional safety
+  * What happens to our system if something fails? Sensor failure? Motor Failure?
+
 
 ## Simulation:
 
@@ -139,7 +183,7 @@ judges asked follow-up questions from what was mentioned in answers to questions
 #### Vehicle and Sensor modeling:
 
 - Good: Used previously captured camera data for perception development/improvement
-- To improve on: Switch to commercially available solutions like IPG CarMaker (vehicle dynamics) and Ansys AVx (sensors). Scored 0 as were using Edinburgh’s open source model)
+- To improve on: Switch to commercially available solutions like IPG CarMaker (vehicle dynamics) and Ansys AVx (sensors). Scored 0 as were using Edinburgh’s open source model
   
 #### Correlation and validation:
 
@@ -161,7 +205,7 @@ judges asked follow-up questions from what was mentioned in answers to questions
 - Good: Talked about camera in ideal vs poor lighting conditions and how it affected perception
 - To improve on: Talk about how noise can affect localisation and control. Also consider how it could affect lidar
   
-### Bruno’s comments on Simulation:
+#### Bruno’s comments on Simulation:
 
 * Provide detailed examples of the three tracks used during testing.
 
@@ -241,6 +285,36 @@ judges asked follow-up questions from what was mentioned in answers to questions
 **General notes:** Heavy and intensive questioning, judges very interested in why the EUFS
 sim was used instead of IPG.
 
+### 2022-2023 Feedback
+
+#### From Harold:
+
+* Each of the dynamic events must be modelled 
+* No need to spend time explaining it just show gifs of our simulation completing each event for example 
+* Go into a bit more detail about the usefulness of simulations and how we used it
+* How did we use simulations to make our decisions - it should help 
+* Some more understanding into vehicle and sensor modelling more detailed explanation if the parameters, justify how we decided how much noise to add
+* Correlation and validation of our simulations in comparison to the real world - use data 
+* Do we have a scale model - f1tenth car for example. How have we used it. 
+* More data & data analysis in general, we didn’t have enough output. 
+* Understanding of environmental considerations. 
+* How does the weather affect our sensors and how did we model this We are allowed to use an open source sim as long as we understand the numbers we used to parametrise it and this is backed by data you don’t get more marks if it is your own sim
+
+#### From Holly:
+
+* Easy Points to get
+  * Model each dynamic event -> Event just a gif of our stack on each event
+* Go into more detail as to why simulation is useful and what we use it for in our development.
+* How do we use simulation to make decisions
+* More understanding into vehicle and sensor modeling
+  * How do we add noise? How do we know how much noise to add?
+* Correlation and Validation
+  * Now we have real data, how do we collerate that to our real design
+* Use a scale model and say how/why we use it? Why is it useful?
+* More Data is very important. Also, how we use it…
+* Understanding of the environment and how it effects our system.
+  * Even if we havent modeled it, explain how we would do that
+* Even if we use an open source simulator, use our own data to inform how we use it and what decisions we made.
 
 ## Real World:
 
@@ -283,7 +357,7 @@ Legislation, society and technology readiness for driver-out vehicles.
 - To improve on: Consider using countries with major differences (e.g. Denmark vs India) where issues would be different (different driving styles, drivers following -or not following- highway code, etc...). Consider a more global in-depth study that can answer the question ‘Is the world ready for Level4 autonomous vehicles deployed on public road?’ rather than comparing 2 countries only. If the answer is no to the question, maybe suggest other places where autonomous vehicles could be already accepted (mining operations, logistical centres…)
   
 
-### Bruno’s comments on Real World:
+#### Bruno’s comments on Real World:
 
 The Case Study alone accounts for half of the total points in the Real World section.
 
@@ -334,3 +408,29 @@ Examples of regulations that manufacturers must comply with to ensure vehicle sa
 | Dealing with weather e.g. snow, fog and rain: | Good: Very good overview of weather effect on each sensor type and how to overcome inclement weather | To improve on: |
 | Wider philosophy and socioeconomic consequences of a driverless world including ethical issues: | Good: Covered ethical, socioeconomic and legal impact | To improve on: Think about seeing the topic from an automotive manufacturer point of view rather than just end user. Discuss ethics of autonomous car avoidance choices (autonomous car choosing between driving over a child or a grandmother) |
 | Case Study: Is the world ready for Level 4 autonomous vehicles deployed on public road? Legislation, society and technology readiness for driver-out vehicles. | Good: Reviewed legislation, society and infrastructure for Denmark and Singapore | To improve on: Consider using countries with major differences (e.g. Denmark vs India) where issues would be different (different driving styles, drivers following -or not following- highway code, etc...). Consider a more global in-depth study that can answer the question ‘Is the world ready for Level4 autonomous vehicles deployed on public road?’ rather than comparing 2 countries only. If the answer is no to the question, maybe suggest other places where autonomous vehicles could be already accepted (mining operations, logistical centres…) |
+
+### 2022-2023 Feedback
+
+#### From Harold:
+
+* Exactly what we’re looking for 
+* What we talk about days to day out in slides 
+* Half the time on topics & half the time on case studies mapped well to industry
+* Selling a service was really good 
+* Trolley problem discussion was basic - more research 
+* Case studies were really really good 
+* Marks go for looking at something new and novel and not just what Tesla is doing for example. 
+* Answered the questions really well Pick different topics for next year and you’ll get more marks
+
+#### From Holly:
+
+* Casual -> What we talk about day to day. That's what we want
+* Half the time with case studies and half the time with other part
+* Novelty is good, brand extensions was a good novel idea
+* Selling a service instead of a car was very novel and good
+* Trolley problem part was a bit basic
+  * From an industry side, it's not that important.
+* Case studies are really good
+  * Picking something local was a really good idea
+* Marks are awarded to people looking at vehicles and environments that have never been explored -> ex Forestry
+* First three topics, pick new topics if we want to win it again
