@@ -2,6 +2,8 @@
 
 This guide assumes that you are running on some distribution of Ubuntu, preferrably Ubuntu 22.04. It should work in either WSL or a native Linux install. We're working on making an article about how to run the stack on distros such as Arch Linux [here](../tutorials/run_code_not_ubuntu.md).
 
+**FASTEST SETUP: MATTEW POWER FROM PATH PLANNING IN 1 hr 30 Mins, if setup faster, please contact docs boss**
+
 ### Prerequisites
 
 Most of our setup scripts are stored in git. Start off by cloning the repository containing our setup scripts.
