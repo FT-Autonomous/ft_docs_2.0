@@ -12,9 +12,10 @@ Most of our setup scripts are stored in git. Start off by cloning the repository
 mkdir ~/ft
 cd ~/ft
 git clone https://github.com/FT-Autonomous/ft-ubuntu-bootstrap
+sudo bash ft-ubuntu-bootstrap/get-prerequisites
 ```
 
-### Installing ROS2 and Gazebo
+### Installing ROS2, Gazebo and EUFS simulator
 
 ROS2 stands for "Robot Operating System 2". It's a framework that makes it easy to architect robotics and automotive systems. Gazebo is a physics simulator that we use to test our code. The standard installation guides are as follows:
 
@@ -26,9 +27,11 @@ The main reason these links are provided are for if you want to go through the i
 ```
 sudo bash ft-ubuntu-bootstrap/get-ros
 sudo bash ft-ubuntu-bootstrap/get-gazebo
+bash ft-ubuntu-bootstrap/get-eufs
+bash ft-ubuntu-bootstrap/get-rosdeps
 ```
 
-Make sure that you have ROS2 sourced in your terminal environment. If it is not already present, add the following line to your `~/.bashrc` file.
+Make sure that you have ROS2 sourced in your terminal environment. If it is not already present, add the following line to your `~/.bashrc` file (this makes sure it gets sourced every time you open your terminal, or you can run it everytime manually)
 
 ```bash
 . /opt/ros/humble/setup.bash
@@ -53,7 +56,6 @@ Once you have set up git your credentials, you can then clone our code and the c
 ```bash
 cd ~/ft
 git clone https://github.com/FT-Autonomous/ft-ubuntu-bootstrap
-bash ft-ubuntu-bootstrap/get-eufs
 gh repo clone FT-Autonomous/FT-FSAI-23 -- --recurse-submodules
 ```
 
@@ -107,7 +109,7 @@ ros2 launch eufs_launcher eufs_launcher.launch.py
 
 ## Running the System
 
-Once you have EUFS running, you can run the whole stack using the following command:
+Once you have EUFS running, you can run the whole stack using the following command (in another terminal tab with everything sourced as before):
 
 ```
 . install/setup.bash
