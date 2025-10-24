@@ -2,8 +2,9 @@
 
 This guide assumes that you are running on some distribution of Ubuntu, preferrably Ubuntu 22.04. It should work in either WSL or a native Linux install. We're working on making an article about how to run the stack on distros such as Arch Linux [here](../tutorials/run_code_not_ubuntu.md).
 
-**FASTEST SETUP: MATTEW POWER FROM PATH PLANNING IN 1 hr 30 Mins, if setup faster, please contact docs boss**
-
+**FASTEST (EUFS) SETUP: MATTEW POWER FROM PATH PLANNING IN 1 hr 30 Mins, if setup faster, please contact docs boss**
+** side note from matthew: this was just eufs, the full stack took a little longer**
+ 
 ### Prerequisites
 
 Most of our setup scripts are stored in git. Start off by cloning the repository containing our setup scripts.
@@ -73,6 +74,12 @@ If you get an error about missing submodules(EX: slam_tools) ensure they are pro
 cd FT-FSAI-23
 git submodule init
 git submodule update
+```
+
+Install the python requirements:
+```bash
+cd FT-FSAI-23
+pip install -r requirements.txt
 ```
 
 ### Getting Set Up for ROS Development
