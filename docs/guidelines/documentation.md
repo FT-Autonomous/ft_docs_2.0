@@ -6,6 +6,14 @@
 - If possible, do this process with at least one person and incorporate their issues and questions in the tutorial.
 - If giving a template shell script, try to avoid using template specifiers that will wreak havoc when copy pasted, as things will inevitably be copy pasted. As an example, We advise against something like `cat <file name>` which may trigger indirection, simply use `cat FILE-NAME` or `cat FILE_NAME`.
 
+#### Adding images to markdown 
+
+- Use standard Markdown image syntax: `![Alt text](path/to/image.png)`
+- **HTML is not supported** in our documentation renderer - avoid using `<img>` tags as they will not display correctly
+- For image sizing, use the curly brace attribute syntax: `![Alt text](image.png){ width=400px }`
+- Always include meaningful alt text for accessibility
+- Store images in the `media/` directory relative to your markdown file
+
 ### Keeping Documentation up to Date
 
 In general you will encounter cases where documentation is inadequate / out of date when people start complaining or asking questions. It can be very easy to issue a temporary fix or give a verbal explanation in this case but it's always best to incorporate such issues in the docs.

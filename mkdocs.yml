@@ -122,6 +122,7 @@ nav: # This is the structure of the sidebar
       - Reducing Boot Time: tutorials/reducing_boot_time.md
       - Running Code on Linux that are not Ubuntu: tutorials/run_code_not_ubuntu.md
       - Path Planning Tutorial (Getting Started on ROS) (Kind of Deprecated): tutorials/path_planning_tutorial.md
+      - How to RDP into the FTA PC: tutorials/rdp_to_fta_pc.md
       - How to SSH into the FTA Pc: tutorials/ssh_to_fta_pc.md
       - Python to C++: tutorials/python_to_cpp.md
       - LiDAR Setup: tutorials/lidar_setup.md
