@@ -37,7 +37,7 @@ Thus there will be three "variables" in play which you will have to replace whil
 To set up the link, open a terminal on the FTA PC and use the following command:
 
 ```bash
-ssh -NR PORT:0.0.0.0:22 MACNEILL-USERNAME@macneill.scss.tcd.ie
+ssh -NTR PORT:0.0.0.0:22 MACNEILL-USERNAME@macneill.scss.tcd.ie
 ```
 
 #### Locally
