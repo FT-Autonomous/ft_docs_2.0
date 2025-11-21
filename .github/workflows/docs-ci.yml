@@ -1,0 +1,53 @@
+name: Docs CI (build, links)
+
+on:
+  pull_request:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build (strict)
+        run: mkdocs build --strict --verbose
+
+      # Link + anchor checker against the built site
+      - name: Check links (Lychee)
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: >
+            --verbose
+            --no-progress
+            --include-fragments
+            --retry-wait-time 2
+            --max-redirects 5
+            --timeout 20
+            --accept 200,206,429
+            ./site
+          fail: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Optional: comment failures on PRs (kept minimal & Vale-free)
+      - name: Post summary on PR
+        if: failure() && github.event_name == 'pull_request'
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: docs-ci
+          message: |
+            ❌ Docs CI failed. Please check the build/logs above or contact the Docs Lead for support.

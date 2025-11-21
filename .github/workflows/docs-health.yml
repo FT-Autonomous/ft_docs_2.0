@@ -1,0 +1,57 @@
+name: Docs Nightly Health
+
+on:
+  schedule:
+    - cron: "17 2 * * *"   # nightly ~02:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  health-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build (non-strict so we always get a report)
+        run: mkdocs build --verbose
+
+      - name: Link scan (Lychee → markdown report)
+        id: lychee
+        uses: lycheeverse/lychee-action@v1
+        with:
+          args: >
+            --no-progress
+            --include-fragments
+            --retry-wait-time 2
+            --max-redirects 5
+            --timeout 20
+            --accept 200,206,429
+            --verbose
+            ./site
+          format: markdown
+          output: lychee-report.md
+          fail: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create/Update health issue
+        uses: peter-evans/create-issue-from-file@v5
+        with:
+          title: "Docs health report (nightly)"
+          content-filepath: lychee-report.md
+          labels: docs, health
+          # Reuse a single rolling issue
+          issue-number: 1
+          update-existing: true
