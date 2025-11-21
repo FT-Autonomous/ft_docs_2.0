@@ -7,9 +7,7 @@ Welcome to the Formula Trinity documentation hub — everything from departments
 
 ## Full stack overview
 
-![Full stack overview diagram](media_home/full_stack_diagram.png){ width=600px }
-
-
+![Full stack overview diagram](media/full_stack_diagram.png){ width=600px }
 
 ## Useful Links
 
