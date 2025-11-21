@@ -4,6 +4,13 @@ Welcome to the Formula Trinity documentation hub — everything from departments
 
 > 💡 **Tip:** Use the search bar to find pages by keyword (e.g., “VLP-16”, “YOLO”, “ROS2”).
 
+
+## Full stack overview
+
+![Full stack overview diagram](media_home/full_stack_diagram.png){ width=600px }
+
+
+
 ## Useful Links
 
 - Formula's very own stack over flow for any debugging: <https://stackoverflowteams.com/c/formula-trinity-autonomous/home>
