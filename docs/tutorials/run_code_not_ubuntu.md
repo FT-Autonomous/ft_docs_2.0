@@ -1,8 +1,4 @@
----
-title: Running our Code on Linux Distributions (That Are Not Ubuntu)
----
-
-## Running our Code on Linux Distributions (That Are Not Ubuntu)
+# Running our Code on Linux Distributions (That Are Not Ubuntu)
 
 Some people run Linux distributions such as Arch Linux. These people need to be able to use our codebase as well.
 

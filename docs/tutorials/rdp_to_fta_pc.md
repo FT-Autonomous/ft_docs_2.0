@@ -1,6 +1,6 @@
----
-title: How to SSH into the FTA PC
----
+
+# How to SSH into the FTA PC
+
 
 > **Note:** The PC reboots automatically every day at **4 AM**.
 

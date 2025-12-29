@@ -89,6 +89,3 @@ It is important to note that the tutorials are for ROS 2 Galactic, which our sta
 
 - [Hypermodern Python Cookiecutter](https://cookiecutter-hypermodern-python.readthedocs.io/en/2022.6.3.post1/#features)
 
-{% figure src="/python resources.png" height="400px" /%}
-
-*Backup image in case the link does not work.*

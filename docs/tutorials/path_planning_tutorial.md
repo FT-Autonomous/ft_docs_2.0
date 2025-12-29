@@ -19,7 +19,7 @@ ros2 topic list -t
 ```
 
 
-{% figure src="https://docs.ros.org/en/jazzy/_images/Topic-MultiplePublisherandMultipleSubscriber.gif" height="200px" /%}
+![rospubsub](https://docs.ros.org/en/jazzy/_images/Topic-MultiplePublisherandMultipleSubscriber.gif)
 
 What is a ROS topic? ROS topics are like TV channels carrying a stream of messages. For path planning, you will listen on a stream of cone data and output a stream containing waypoints for the car to follow. If you look through the list that was printed after the list command, you will see a topic type called `/cones` and the type `eufs_msgs/msg/ConeArrayWithCovariance` next to it. To print information about the `ConeArrayWithCovariance` message, we can use the following command:
 

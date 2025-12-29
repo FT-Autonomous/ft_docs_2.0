@@ -1,13 +1,18 @@
+# Pure Pursuit Callback
+
 *In this document, the functions of the Pure Pursuit node are given and explained in detail. On github, this is the "korean_pure_pursuit" branch, that was deployed in the 2024 competition*
-# Class
+
+## Class
 
 The majority of the code is inside the Pure Pursuit class, which is called in the mains function. This class acts as the node which ROS communicates to. 
-# Functions 
+
+## Functions 
 
 There's a lot of functions in this script alone, and it can be hard to navigate. Here, I'll cover the most important ones first, then work backwards from there. 
 
-# self.cb
+## self.cb
 This is the most important function, as this is where all our computation takes place, and where most of the other functions are called. You can image that is our 'mains()' function, but inside a class structure. 
+
 ### Step 1 : Find Goal Point 
 
 The first task of self.cb is to determine the car's state (so, where are we?), this takes in the current x y coordinates (called 'pose'), and direction the car is facing (called 'yaw'). The function *quaternion_to_angle(data.pose.orientation)* converts the yaw from a quaternion to an angle, which we can compute more easily with. 
