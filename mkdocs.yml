@@ -21,7 +21,7 @@ theme:
     - toc.follow
     - content.status
 
-  # custom_dir: docs/overrides
+  custom_dir: docs/overrides
 
   palette:
   - media: "(prefers-color-scheme: light)"
@@ -58,6 +58,7 @@ markdown_extensions:
 extra_javascript:
   - javascripts/mathjax.js
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+  - javascripts/auth.js
 
 plugins:
   - search
