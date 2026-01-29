@@ -1,6 +1,4 @@
 // Google OAuth Configuration
-// Note: Replace YOUR_CLIENT_ID with your actual Google OAuth Client ID
-// Get your Client ID from: https://console.cloud.google.com/apis/credentials
 const GOOGLE_CLIENT_ID = '607923524663-lrqs6s40j2obiviflshcnafql615qfd9.apps.googleusercontent.com';
 const ALLOWED_DOMAIN = '@tcd.ie';
 
