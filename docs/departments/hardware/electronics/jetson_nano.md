@@ -19,4 +19,4 @@ Its clear to see that a Jetson is blatantly overkill for hardwares uses, but the
 - We had one going without use, so we didnt have to buy an alternative
 
 ## What about ADS
-for the ADS car, hardware has adapted the use case of the Jetson to functionally do the same role, but with more controllers (including one using a modbus/TCP protocol). As a new purchase is required, it will be replaced with a Raspberry Pi 5 alternative.
+For the ADS car, hardware has adapted the use case of the Jetson to functionally do the same role, but with more controllers (including one using a modbus/TCP protocol). As a new purchase is required, it will be replaced with a Raspberry Pi 5 alternative.

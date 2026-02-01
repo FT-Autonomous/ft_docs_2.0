@@ -98,6 +98,8 @@ nav: # This is the structure of the sidebar
             - Overview: departments/hardware/overview.md
             - Electronics:
                   - Electronics Overview: departments/hardware/electronics/electronics_overview.md
+                  - Jetson Nano: departments/hardware/electronics/jetson_nano.md
+                  - Microcontrollers: departments/hardware/electronics/microcontrollers.md
             - Mechanical:
                   - Mechanical Overview: departments/hardware/mechanical/mechanical_overview.md
                   - Lunchy: departments/hardware/mechanical/lunchy.md
