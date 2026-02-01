@@ -96,8 +96,11 @@ nav: # This is the structure of the sidebar
             - PID Tuning: departments/control/pid_tuning.md
       - Hardware:
             - Overview: departments/hardware/overview.md
-            - Electronics: departments/hardware/electronics.md
-            - Mechanical: departments/hardware/mechanical.md
+            - Electronics:
+                  - Electronics Overview: departments/hardware/electronics/electronics_overview.md
+            - Mechanical:
+                  - Mechanical Overview: departments/hardware/mechanical/mechanical_overview.md
+                  - Lunchy: departmehts/hardware/mechanical/lunchy.md
           
   - Resources:
       - General Competition Info: resources/competition.md
