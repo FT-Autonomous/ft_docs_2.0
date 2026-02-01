@@ -101,6 +101,7 @@ nav: # This is the structure of the sidebar
             - Mechanical:
                   - Mechanical Overview: departments/hardware/mechanical/mechanical_overview.md
                   - Lunchy: departments/hardware/mechanical/lunchy.md
+                  - Modem: departments/hardware/mechanical/modem.md
           
   - Resources:
       - General Competition Info: resources/competition.md
