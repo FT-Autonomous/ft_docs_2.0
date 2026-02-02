@@ -1,39 +1,25 @@
 # State Estimation
 
-Put all documentation here!
+State Estimation is in charge of two main parts: State Machine and SLAM (Simultaneous Localization and Mapping). Since, SLAM relies on sensor inputs, this necessitates the use of an EKF (Extended Kalman Filter) and a GPS (Global Positioning System).
 
-# State estimation
-
-State estimation is a part of autonomous that is in charge of communicating information throughout the system. There are approximately 4 key parts, the state machine, SLAM (Simultaneous Localization And Mapping), the EKF (Extended Kalman Filter) and the GPS (Global positioning system) research project. 
-
-The state machine is in charge of communicating with the machine through ROS the current state that the car is in, if it is driving, stopped, if it is turning, etc. SLAM is implemented in order to be able to figure out where the car is relative to cones and the track. The EKF is effectively a machine learning software that learns from previous inputs what the hypothetical input should be to eliminate outliers. GPS is a research project that we hope to incorporate into our final solution. 
+The state machine is responsible for communicating the vehicle's current state through ROS, such as whether the car is driving, stopped, or turning. SLAM is used to make a map of the track and determine the car's current position relative to the track. The EKF is used to estimate the car's current position.
 
 # Goals
-
-Our general goal for the year is to improve our solution, understand previously written code about the EKF and SLAm and incorporate the GPS into our final solution. The primary goal with all of this is to document it properly so that the knowledge can properly be passed down to the new recruits. 
+1. Implement GraphSLAM
+2. Use the GPS as an input for GraphSLAM
+3. Rewrite the logic for the State Machine
 
 # Previous Implementations
 
-## 2023/2024
+## 2025/2026
 
-Our state estimation system and SLAM was greatly improved upon. We bought a GPS and began some testing to see what solutions are possible to be integrated. 
+In the 2025/2026 iteration, a new state machine was introduced to improve system understanding. GraphSLAM was used, providing a more robust and globally consistent solution compared to previous approaches. Additionally, GPS has been incorporated to enhance global position estimation and long-term accuracy. The GPS has it's own built-in EKF. This simplifies State Estimation stack.
 
-### GitHub Code 🤓
+## Up to 2024/2025
 
-* Fast SLAM: <https://github.com/FT-Autonomous/FT-FastSLAM-2023/blob/main/src/slam/fastslam/fastslam.py>
-* SLAM node: <https://github.com/FT-Autonomous/FT-FastSLAM-2023/blob/main/src/slam/slam/slam_node.py>
-* Extended Kalman Filter: <https://github.com/FT-Autonomous/ft_system/tree/master/src/ft_sensors>
-* State Machine: <https://github.com/FT-Autonomous/ft_system/tree/master/src/ft_state_machine>
+In earlier implementations up to the 2024/2025 development cycle, the system primarily relied on FastSLAM for simultaneous localization and mapping. Sensor data from the ZED camera and LiDAR were fused using an Extended Kalman Filter (EKF) to estimate the vehicle's pose. This approach enabled the vehicle to localize itself within the environment while constructing a map of surrounding features. The EKF played a key role in reducing sensor noise and improving pose accuracy by combining visual and LiDAR measurements. While effective, this implementation had limitations in robustness, as our algorithm would consistently alter the cone's positions due to noise.
 
-### Research Papers 📜 
+See more:
 
-### GitHub Code 🤓
-
-* Fast SLAM: <https://github.com/FT-Autonomous/FT-FastSLAM-2023/blob/main/src/slam/fastslam/fastslam.py>
-* SLAM node: <https://github.com/FT-Autonomous/FT-FastSLAM-2023/blob/main/src/slam/slam/slam_node.py>
-* Extended Kalman Filter: <https://github.com/FT-Autonomous/ft_system/tree/master/src/ft_sensors>
-* State Machine: <https://github.com/FT-Autonomous/ft_system/tree/master/src/ft_state_machine>
-
-### Research Papers 📜 
-
-* AMZ Driverless: <https://arxiv.org/pdf/1905.05150.pdf>
+- FastSLAM: <https://github.com/FT-Autonomous/FT-FSAI-23>
+- State Machine and EKF: <https://github.com/FT-Autonomous/ft_system>
