@@ -1,0 +1,3 @@
+# Need to fill this in
+Purpose of document - everyone has different methods to 3d print. For consistency, when printing parts for Hardware the below settings are what should typically be used (although each part is different, also save the .3mf and .stl files when able because of this).
+This section isn't exactly a priority and needs to be discussed before I can compile this, maybe this section ain't needed so it's purposely not visible on the website right now.
