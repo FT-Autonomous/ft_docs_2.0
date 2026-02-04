@@ -102,8 +102,12 @@ nav: # This is the structure of the sidebar
                   - Microcontrollers: departments/hardware/electronics/microcontrollers.md
             - Mechanical:
                   - Mechanical Overview: departments/hardware/mechanical/mechanical_overview.md
-                  - Lunchy: departments/hardware/mechanical/lunchy.md
-                  - Modem: departments/hardware/mechanical/modem.md
+                  - 3d Printing Reference: departments/hardware/mechanical/3dprinting.md
+                  - Competition Mount:
+                      - Mount overview: departments/hardware/mechanical/mount/mount_overview.md
+                      - Lunchy: departments/hardware/mechanical/mount/lunchy.md
+                      - Modem: departments/hardware/mechanical/mount/modem.md
+                  - Rigby: departments/hardware/mechanical/rigby.md
           
   - Resources:
       - General Competition Info: resources/competition.md

@@ -1,17 +1,19 @@
 # Modem
+*This is a new page which will see rapid changes over the next few weeks*  
+
 The modem had a custom housing designed for it as the original housing was too large. The antenni were snapped off to adhear to comp rules and for space, however original housing and antenni should still be in the AI storage closet.
 
-## Modem 101 (for dummies)
-### Important Information:
-Model: Archer C50 (EU) - Ver: 6.20
-Full name: Archer C50 AC1200 Dual Band Wi-Fi Router.
-Power: 9V - 0.85A
-Default Access: http://tplinkwifi.net
-Wireless Password/Pin: 47142855
+## Modem 101 (for dummies)  
+### Important Information:  
+Model: Archer C50 (EU) - Ver: 6.20  
+Full name: Archer C50 AC1200 Dual Band Wi-Fi Router.  
+Power: 9V - 0.85A  
+Default Access: http://tplinkwifi.net  
+Wireless Password/Pin: 47142855  
 
-Link to product specs: https://www.tp-link.com/uk/home-networking/wifi-router/archer-c50/#specifications
-Link to product manual: https://www.tp-link.com/uk/support/download/archer-c50/ (pdf available in directory with modem CAD files)
-You can see a picture of the original UI lighting and info-card in the reference pictures saved alongside the CAD files.
+Link to product specs: https://www.tp-link.com/uk/home-networking/wifi-router/archer-c50/#specifications  
+Link to product manual: https://www.tp-link.com/uk/support/download/archer-c50/ (pdf available in directory with modem CAD files)  
+You can see a picture of the original UI lighting and info-card in the reference pictures saved alongside the CAD files.  
 
 #### Lighting Meanings 
 (from left to right):  
@@ -93,8 +95,8 @@ You should be able to just directly print from the 3mf files and it should work,
 The 2 pins at the back on the inside are for holes on the modem.  
 The key-hole holes on the bottom are for mounting.  
 The raised main platform for screwing should align exactly with the board's cutout.  
-There are small ridges on the main body printout that align with the roof printout to make them align better.
-The grates on the side are mostly aesthetic, but also save some filament and serve the cooling need letting air flow thorugh.
-The 3mf files are printed in that orientation so the top side looks clean when printed, entirely aesthetic but no harm done anywhere.
-You'll probably have to loctite the screw holder on the roof back together, then it will stay there solid - there's a weird point of failure.
+There are small ridges on the main body printout that align with the roof printout to make them align better.  
+The grates on the side are mostly aesthetic, but also save some filament and serve the cooling need letting air flow thorugh.  
+The 3mf files are printed in that orientation so the top side looks clean when printed, entirely aesthetic but no harm done anywhere.  
+You'll probably have to loctite the screw holder on the roof back together, then it will stay there solid - there's a weird point of failure.  
 

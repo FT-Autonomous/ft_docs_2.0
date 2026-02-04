@@ -1,5 +1,6 @@
 # Lunchy
-
+*This is a new page which will see rapid changes over the next few weeks*  
+Still needed in this section: breakdown of the design features in the current Lunchy design (spacing, materials, etc)  
 ## Design Process Logs
 *Documentation wasn't done on V1-V3*
 
