@@ -1,6 +1,6 @@
 # Rigby my beloved
 
-Rigby is our internal car developed to simulate the ADS-DV car so we can test the AI stack prior to competition. A breakdown of the electrical workings of Rigby can be found in the [Electronics](../../Electronics/electronics_overview) section. This section outlines the mechanical workings of the car.
+Rigby is our internal car developed to simulate the ADS-DV car so we can test the AI stack prior to competition. A breakdown of the electrical workings of Rigby can be found in the [Electronics](../electronics/electronics_overview.md) section. This section outlines the mechanical workings of the car.
 ## Parts List  
 
 ### Purchasable Parts  

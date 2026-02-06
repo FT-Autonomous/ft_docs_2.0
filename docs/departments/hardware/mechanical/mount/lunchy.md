@@ -1,8 +1,28 @@
-# Lunchy
-*This is a new page which will see rapid changes over the next few weeks*  
-Still needed in this section: breakdown of the design features in the current Lunchy design (spacing, materials, etc)  
+# Lunchy 
+*pictures will be added to aid explanations later*
+
+Naming system:  
+- **Basey** is the base of Lunchy, it is a 4mm thick base that is screwed onto the base plate.  
+- **Lunchy** is the main envelope of the weatherproofing box - it is the part holding the sponsor panels.  
+- **Liddy** is the slidable roof for Lunchy which covers both the top of the box and the vent to protect it from rain.  
+  
+## Design Features  
+Main internal area of the box is **150x150x150** mm + the 30mm slanted roof, so one wall is 150 mm in height, one is 180 mm in height, and the other 2 are mirrored slopes from 150-180 mm sides.  
+There is an additional **40mm extrusion on the back for wiring**. It is sloped outwards eliptically with the furthest distance being the 40mm measurement.  
+The 30mm gap created (and subsequently overhung by Liddy to protect from rain) allows for airflow of the parts.  
+All sharp edges possible are filleted or champered for ease of printing (<u>NOTE FOR MECHANICAL BEFORE SUMMER 2026, CHECK FSAI RULES ON CORNERS, I THINK EXTERNAL NEED MINIMUM 1mm EDGE</u>).  
+For the first 5mm of the build area there is a raised internal wall around the edge, reducing the build area to approximately 147.8 x 147.8 mm. This is done to ensure that Basey and Lunchy fit seamlessly together and align correctly for screwing it in.  
+Basey has a small slit on 2 of the corners, which should allow for slightly increased flexibility if the fit for Lunchy is tight.  
+There is a small slit in Basey at the front for the wires for the LiDAR to fit through.  
+The positioning of the screw holes for Basey/Lunchy are in their location for a specific purpose. They are sticking to the sides to allow maximum clearance at the front/rear of the casing. The front screw holes are put around the corners where most of the force would be applied evenly and where the walls of Lunchy are least interupted (being 4mm thick at this point, compared to 2mm at other points). At the rear, they are pushed forward 25mm to allow Lunchy to hang slighly off the plate with the screws themselves being approximately 30mm from the rear. When referring to the rear, the rear is meant as back of the box excluding the extrusion to allow for cabling (ie rear of the main build area).  
+
+A note on airflow: if modifying the computer casing, ensure that little or no PLA filament is touching the Jetson or LiDAR directly, and preferably leave a gap betweeen the components. PLA has a glass transition temperature of 55-60 degrees and loses structural integrity at around 50 degrees.  
+  
+An internal chasis will be designed (like a computer rack style thing) to house the components which should be able to attach and detach independent of Lunchy's main body.  
+Basey (the base of Lunchy) will be a permanent part of the computer chasis, being transferred with the computer when needed, such as between the AI car and the ADS car.  
+
 ## Design Process Logs
-*Documentation wasn't done on V1-V3*
+*Documentation wasn't done on V1-V3*  
 
 ### LunchyV4
 Lunchy 4 won't work as built, and new ideas need to be added at the beginning.
