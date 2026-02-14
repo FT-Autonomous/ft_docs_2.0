@@ -108,7 +108,16 @@ nav: # This is the structure of the sidebar
                       - Lunchy: departments/hardware/mechanical/mount/lunchy.md
                       - Modem: departments/hardware/mechanical/mount/modem.md
                   - Rigby: departments/hardware/mechanical/rigby.md
-          
+  - ADS:
+      - Systems Integration:
+            - Overview: ads/systems_integration/overview.md
+            - Computer Placement: ads/systems_integration/computer_placement.md
+            - Zed2i Placement: ads/systems_integration/zed2i_placement.md
+            - LiDar Placement: ads/systems_integration/lidar_placement.md
+      - AI/ADS Interface:
+            - Overview: ads/aiads_interface/overview.md
+      - Actuation Control:
+            - Overview: ads/actuation_control/overview.md
   - Resources:
       - General Competition Info: resources/competition.md
       - General Git Info: resources/git.md
