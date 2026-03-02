@@ -97,11 +97,11 @@ nav: # This is the structure of the sidebar
       - Hardware:
             - Overview: departments/hardware/overview.md
             - Electronics:
+                  - Electronics Overview: departments/hardware/electronics/electronics_overview.md
                   - Code:
                         - Libraries:
                               - FTSerial: departments/hardware/electronics/code/libraries/ftserial.md
                         - Steering: departments/hardware/electronics/code/steering.md
-                  - Electronics Overview: departments/hardware/electronics/electronics_overview.md
                   - Jetson Nano: departments/hardware/electronics/jetson_nano.md
                   - Microcontrollers: departments/hardware/electronics/microcontrollers.md
             - Mechanical:
