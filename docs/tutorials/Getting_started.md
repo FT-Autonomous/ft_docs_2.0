@@ -13,7 +13,7 @@ Most of our setup scripts are stored in git. Start off by cloning the repository
 mkdir ~/ft
 cd ~/ft
 git clone https://github.com/FT-Autonomous/ft-ubuntu-bootstrap
-sudo bash ft-ubuntu-bootstrap/get-prerequisites
+sudo bash ft-ubuntu-bootstrap/setup/get-prerequisites
 ```
 
 ### Installing ROS2, Gazebo and EUFS simulator
@@ -25,11 +25,16 @@ ROS2 stands for "Robot Operating System 2". It's a framework that makes it easy 
 
 The main reason these links are provided are for if you want to go through the installation yourself piece by piece. As a shortcut, you can avail of our pre made setup scripts and simply run the following commands, assuming you have downloaded the `ft-ubuntu-bootstrap` repository previously.
 
+> **Shortcut:** To run all setup steps automatically, you can instead run:
+> ```bash
+> sudo bash ft-ubuntu-bootstrap/install.sh
+> ```
+
 ```
-sudo bash ft-ubuntu-bootstrap/get-ros
-sudo bash ft-ubuntu-bootstrap/get-gazebo
-bash ft-ubuntu-bootstrap/get-eufs
-bash ft-ubuntu-bootstrap/get-rosdeps
+sudo bash ft-ubuntu-bootstrap/setup/get-ros
+sudo bash ft-ubuntu-bootstrap/setup/get-gazebo
+bash ft-ubuntu-bootstrap/setup/get-eufs
+bash ft-ubuntu-bootstrap/setup/get-rosdeps
 ```
 
 Make sure that you have ROS2 sourced in your terminal environment. If it is not already present, add the following line to your `~/.bashrc` file (this makes sure it gets sourced every time you open your terminal, or you can run it everytime manually)
