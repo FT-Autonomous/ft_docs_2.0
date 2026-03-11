@@ -25,11 +25,6 @@ ROS2 stands for "Robot Operating System 2". It's a framework that makes it easy 
 
 The main reason these links are provided are for if you want to go through the installation yourself piece by piece. As a shortcut, you can avail of our pre made setup scripts and simply run the following commands, assuming you have downloaded the `ft-ubuntu-bootstrap` repository previously.
 
-> **Shortcut:** To run all setup steps automatically, you can instead run:
-> ```bash
-> sudo bash ft-ubuntu-bootstrap/install.sh
-> ```
-
 ```
 sudo bash ft-ubuntu-bootstrap/setup/get-ros
 sudo bash ft-ubuntu-bootstrap/setup/get-gazebo
