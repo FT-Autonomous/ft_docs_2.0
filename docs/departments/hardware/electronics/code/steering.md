@@ -6,7 +6,7 @@ Source: `FT-Hardware/Code/Rigby/SteeringCode/SteeringWithPotCode/SteeringWithPot
 
 ## How It Works
 
-1. Receives a target angle (degrees) over serial as a newline-terminated float via [FTSerial](ftserial.md)
+1. Receives a target angle (degrees) over serial as a newline-terminated float via [FTSerial](libraries/ftserial.md)
 2. Reads current angle from a potentiometer on the steering column
 3. Proportional controller drives the motor until the error is within the dead band
 4. Prints telemetry (angle, target, error) at ~20 Hz
