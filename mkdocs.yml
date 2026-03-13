@@ -102,6 +102,7 @@ nav: # This is the structure of the sidebar
                         - Libraries:
                               - FTSerial: departments/hardware/electronics/code/libraries/ftserial.md
                         - Steering: departments/hardware/electronics/code/steering.md
+                        - Wokwi: departments/hardware/electronics/code/wokwi.md
                   - Jetson Nano: departments/hardware/electronics/jetson_nano.md
                   - Microcontrollers: departments/hardware/electronics/microcontrollers.md
             - Mechanical:
