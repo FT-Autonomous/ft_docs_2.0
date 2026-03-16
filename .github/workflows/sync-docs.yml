@@ -1,0 +1,27 @@
+name: Sync docs to OpenAI vector store
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "docs/**/*.md"
+  workflow_dispatch:   # allow manual trigger from GitHub Actions tab
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install OpenAI SDK
+        run: pip install openai
+
+      - name: Sync docs to vector store
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          VECTOR_STORE_ID: ${{ secrets.VECTOR_STORE_ID }}
+        run: python scripts/sync_docs.py

@@ -1,0 +1,49 @@
+{% extends "main.html" %}
+
+{% block content %}
+<div
+  class="md-content chatbot-page"
+  data-api-url="https://ft-docs-api.vercel.app/api/chat"
+>
+  <h1 class="chatbot-title">FT Docs Assistant</h1>
+  <p class="chatbot-subtitle">
+    Ask questions about the Formula Trinity documentation. Answers are grounded
+    in the team wiki — for general ROS2, Python, and other external tools the
+    model will draw on its own training knowledge and let you know.
+  </p>
+
+  <div
+    id="chatbot-messages"
+    class="chatbot-messages"
+    role="log"
+    aria-live="polite"
+    aria-label="Conversation"
+  ></div>
+
+  <form id="chatbot-form" class="chatbot-input-row" autocomplete="off">
+    <input
+      id="chatbot-input"
+      type="text"
+      class="chatbot-input"
+      placeholder="e.g. How does the LiDAR clustering algorithm work?"
+      maxlength="500"
+      aria-label="Your question"
+    />
+    <button
+      type="submit"
+      id="chatbot-send"
+      class="md-button md-button--primary chatbot-send"
+      aria-label="Send"
+    >
+      Send
+    </button>
+  </form>
+
+  <p class="chatbot-disclaimer">
+    Answers are AI-generated from the team docs. Always verify critical
+    information against the source pages.
+  </p>
+</div>
+
+<script src="{{ 'javascripts/chatbot.js' | url }}"></script>
+{% endblock %}
