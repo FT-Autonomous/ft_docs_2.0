@@ -139,6 +139,7 @@ nav: # This is the structure of the sidebar
       - General Linux Resources: resources/linux.md
       - The ROS2 Visualization Stack RVIZ2: resources/rviz2.md
       - The ROS2 Transforms Library (TF2): resources/tf2.md
+      - ROS2 Python to C++ translator: resources/ros2-translator.html
       - EUFS Sim: resources/eufs_sim.md
       - IPG CarMaker: resources/ipg_carmaker.md
       - Ros Can: resources/ros_can.md

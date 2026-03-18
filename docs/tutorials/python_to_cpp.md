@@ -105,6 +105,15 @@ Also when it comes to types there is also ```auto``` but I've generally had more
 
 ChatGPT is actually quite good for helping figure out types but don't rely on it too heavily, if you really need it ask it one line at a time
 
+#### ROS2 Python to C++ translator tool:
+
+If your still struggling with the syntax conversion and want to see a rough realtime translation of python to C++ code please check out the [ROS2 Python to C++ Translator](../resources/ros2-translator.html).
+
+Note: this tool is still a work in progress, but it should give you an idea of which direction to head in.
+
+Naturally this tool is **not meant to sort out everything for you**, this is more of a way for you to see the main ROS2 framework specific translations in realtime.
+
+**Have a go!** Try paste in one of your own Python nodes to see how it deals with the imports, and with the general node structure etc.
 
 #### Global variables
 
