@@ -105,6 +105,12 @@ nav: # This is the structure of the sidebar
                         - Wokwi: departments/hardware/electronics/code/wokwi.md
                   - Jetson Nano: departments/hardware/electronics/jetson_nano.md
                   - Microcontrollers: departments/hardware/electronics/microcontrollers.md
+                  - Power Systems:
+                      - Wiring Loom: departments/hardware/electronics/power_systems/wiring_loom.md
+                      - Switchbox: departments/hardware/electronics/power_systems/switchbox.md
+                      - LiPo: departments/hardware/electronics/power_systems/lipo.md
+                      - Using High Power Electrical Systems: departments/hardware/electronics/power_systems/wirefire.md
+                  
             - Mechanical:
                   - Mechanical Overview: departments/hardware/mechanical/mechanical_overview.md
                   - 3d Printing Reference: departments/hardware/mechanical/3dprinting.md
