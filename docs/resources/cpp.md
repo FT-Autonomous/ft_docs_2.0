@@ -15,6 +15,23 @@ You want to be able to get the most out of the framework your working with as yo
 
 Personally I recommend **CLion (from IntelliJ)**. It might have been the only one I've used, but so far its worked fine on linux, and hasn't given me too much grief.
 
+#### Configuring CLion:
+
+In order to get the proper benefits out of using Clion, you have to configure it to work with ROS2 framework. This will give you the proper IDE based features, such as dropdown of different message types along with proper syntax correction and highlighting in realtime. It becomes almost impossible to get a build error if you get this configured correctly meaning that, for the most part, syntax errors become a thing of the past.
+
+The CLion IDE provides a version of CMake but you want to direct it to your own one (and you want to add much needed dependencies before hand) so navigate to Settings -> Build, Tools, Deployment -> Toolchains and set CMake to a custom script e.g. /home/jakecasserly/ws/clion_setup.sh (I'm hoping I might be able to provide this on the repo)
+
+The setup script looks something like this: 
+
+```bash
+#!/bin/bash
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+. /opt/ros/humble/setup.bash
+. "$SCRIPT_DIR/install/setup.bash"
+
+exec /usr/bin/cmake "$@"
+```
+
 ### Semicolons everywhere
 
 If there's a piece of code you just can't understand is wrong, and you've quoted GPT a million times to no avail, **it might be because you missed a semicolon on the line prior**. Its happened too many times to me, and C++ compilers generally not built to spot that type of thing (you might think they should be, but think about it and it might make sense why they aren't), and neither is an IDE (to my knowledge).
