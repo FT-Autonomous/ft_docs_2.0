@@ -127,6 +127,7 @@ nav: # This is the structure of the sidebar
             - LiDar Placement: ads/systems_integration/lidar_placement.md
       - AI/ADS Interface:
             - Overview: ads/aiads_interface/overview.md
+            - Raspberry Pi Setup: ads/aiads_interface/raspberrypi.md
       - Actuation Control:
             - Overview: ads/actuation_control/overview.md
   - Resources:
