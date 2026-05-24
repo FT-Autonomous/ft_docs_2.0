@@ -13,7 +13,7 @@ Most of our setup scripts are stored in git. Start off by cloning the repository
 mkdir ~/ft
 cd ~/ft
 git clone https://github.com/FT-Autonomous/ft-ubuntu-bootstrap
-sudo bash ft-ubuntu-bootstrap/get-prerequisites
+sudo bash ft-ubuntu-bootstrap/install.sh
 ```
 
 ### Installing ROS2, Gazebo and EUFS simulator
