@@ -84,7 +84,7 @@ nav: # This is the structure of the sidebar
       - State Estimation:
             - Overview: departments/state_estimation/overview.md
             - Theory: departments/state_estimation/theory.md
-	    	- GraphSLAM: departments/state_estimation/graph_slam.md
+	    	- GraphSLAM: departments/state_estimation/graphslam.md
       - Path Planning:
             - Overview: departments/path_planning/overview.md
             - Theory: departments/path_planning/theory.md
