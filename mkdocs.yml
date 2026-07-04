@@ -145,6 +145,7 @@ nav: # This is the structure of the sidebar
       - EUFS Sim: resources/eufs_sim.md
       - IPG CarMaker: resources/ipg_carmaker.md
       - Ros Can: resources/ros_can.md
+      - PEAK PCAN-USB SocketCAN: resources/peak_pcan_usb_socketcan.md
       - Why the F*ck is The Car Not Moving: resources/why_is_car_not_moving.md
       - Other Relevant Sites: resources/relevant.md
 
