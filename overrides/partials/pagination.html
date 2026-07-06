@@ -1,0 +1,46 @@
+{# docs/overrides/partials/pagination.html #}
+{% set prev = page.previous_page %}
+{% set next = page.next_page %}
+{% import "partials/language.html" as lang with context %}
+
+{# Helper to show "Parent: Title" if a parent exists #}
+{% macro label(item) -%}
+  {%- set p = item.parent if item.parent else (item.ancestors | last if item.ancestors else none) -%}
+  {%- if p and p.title -%}
+    {{ p.title }}: {{ item.title }}
+  {%- else -%}
+    {{ item.title }}
+  {%- endif -%}
+{%- endmacro %}
+
+<nav class="md-footer__inner md-grid" aria-label="{{ lang.t('footer') }}">
+  {# Previous link #}
+  {% if prev %}
+    <a class="md-footer__link md-footer__link--prev" href="{{ prev.url | url }}" rel="prev">
+      <div class="md-footer__button md-icon">
+        {% include ".icons/material/arrow-left.svg" %}
+      </div>
+      <div class="md-footer__title">
+        <div class="md-ellipsis">
+          <span class="md-footer__direction">{{ lang.t("nav.previous") }}</span>
+          {{ label(prev) }}
+        </div>
+      </div>
+    </a>
+  {% endif %}
+
+  {# Next link #}
+  {% if next %}
+    <a class="md-footer__link md-footer__link--next" href="{{ next.url | url }}" rel="next">
+      <div class="md-footer__title">
+        <div class="md-ellipsis">
+          <span class="md-footer__direction">{{ lang.t("nav.next") }}</span>
+          {{ label(next) }}
+        </div>
+      </div>
+      <div class="md-footer__button md-icon">
+        {% include ".icons/material/arrow-right.svg" %}
+      </div>
+    </a>
+  {% endif %}
+</nav>

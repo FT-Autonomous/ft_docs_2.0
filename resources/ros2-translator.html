@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ROS2 Python → C++ Translator</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:         #080b10;
+    --surface:    #0e1219;
+    --panel:      #111620;
+    --border:     #1c2333;
+    --border-hi:  #2a3550;
+    --py-accent:  #4a9eff;
+    --cpp-accent: #ff7b3a;
+    --py-dim:     rgba(74,158,255,0.12);
+    --cpp-dim:    rgba(255,123,58,0.12);
+    --py-glow:    rgba(74,158,255,0.25);
+    --cpp-glow:   rgba(255,123,58,0.25);
+    --text:       #c8d0e0;
+    --text-dim:   #4a5570;
+    --green:      #3effa0;
+    --yellow:     #ffd166;
+    --comment:    #3a4a6a;
+    --keyword:    #a78bfa;
+    --string:     #86efac;
+    --number:     #fb923c;
+    --type:       #67e8f9;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    height: 100%;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    overflow: hidden;
+  }
+
+  /* ── SCANLINE OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0,0,0,0.04) 2px,
+      rgba(0,0,0,0.04) 4px
+    );
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* ── HEADER ── */
+  header {
+    height: 52px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--py-accent), transparent 40%, transparent 60%, var(--cpp-accent));
+    opacity: 0.5;
+  }
+
+  .logo {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 14px;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .logo-py  { color: var(--py-accent); }
+  .logo-sep { color: var(--text-dim); font-size: 18px; font-weight: 300; }
+  .logo-cpp { color: var(--cpp-accent); }
+
+  .badge {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    color: var(--text-dim);
+    border: 1px solid var(--border-hi);
+    padding: 3px 8px;
+    text-transform: uppercase;
+  }
+
+  .status-bar-top {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .status-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    box-shadow: 0 0 6px var(--green);
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100% { opacity: 1; }
+    50%      { opacity: 0.4; }
+  }
+
+  .status-label {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .workspace {
+    display: flex;
+    height: calc(100vh - 52px - 28px);
+  }
+
+  /* ── PANELS ── */
+  .panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .panel-header {
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+    gap: 8px;
+  }
+
+  .panel-left  .panel-header { background: var(--py-dim);  border-right: 1px solid var(--border); }
+  .panel-right .panel-header { background: var(--cpp-dim); }
+
+  .panel-left  { border-right: 1px solid var(--border); }
+
+  .panel-tag {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .panel-left  .panel-tag { color: var(--py-accent); }
+  .panel-right .panel-tag { color: var(--cpp-accent); }
+
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+  }
+  .panel-left  .dot { background: var(--py-accent);  box-shadow: 0 0 6px var(--py-accent); }
+  .panel-right .dot { background: var(--cpp-accent); box-shadow: 0 0 6px var(--cpp-accent); }
+
+  .panel-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: auto;
+  }
+
+  .btn-copy {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    background: transparent;
+    border: 1px solid var(--border-hi);
+    padding: 3px 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-copy:hover {
+    color: var(--cpp-accent);
+    border-color: var(--cpp-accent);
+    box-shadow: 0 0 8px var(--cpp-glow);
+  }
+  .btn-copy.copied {
+    color: var(--green);
+    border-color: var(--green);
+  }
+
+  .line-count {
+    font-size: 10px;
+    color: var(--text-dim);
+  }
+
+  /* ── EDITOR AREA ── */
+  .editor-wrap {
+    flex: 1;
+    display: flex;
+    overflow: hidden;
+    background: var(--panel);
+  }
+
+  .line-nums {
+    width: 44px;
+    padding: 14px 0;
+    text-align: right;
+    color: var(--text-dim);
+    font-size: 12px;
+    line-height: 1.7;
+    user-select: none;
+    flex-shrink: 0;
+    overflow: hidden;
+    border-right: 1px solid var(--border);
+    padding-right: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  .line-nums > span {
+    display: block;
+    line-height: 1.7;
+    font-size: 12px;
+  }
+
+  textarea {
+    flex: 1;
+    background: transparent;
+    color: var(--text);
+    border: none;
+    outline: none;
+    resize: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    padding: 14px 14px 14px 12px;
+    tab-size: 4;
+    caret-color: var(--py-accent);
+    white-space: pre;
+    overflow-wrap: normal;
+    overflow-x: auto;
+  }
+
+  textarea::selection {
+    background: rgba(74,158,255,0.2);
+  }
+
+  .output-area {
+    flex: 1;
+    overflow: auto;
+    padding: 14px 14px 14px 12px;
+    font-size: 13px;
+    line-height: 1.7;
+    white-space: pre;
+    tab-size: 4;
+  }
+
+  /* ── SYNTAX HIGHLIGHT TOKENS ── */
+  .t-comment  { color: var(--comment); font-style: italic; }
+  .t-keyword  { color: var(--keyword); }
+  .t-type     { color: var(--type); }
+  .t-string   { color: var(--string); }
+  .t-number   { color: var(--number); }
+  .t-include  { color: var(--py-accent); }
+  .t-plain    { color: var(--text); }
+  .t-dim      { color: var(--text-dim); }
+  .t-warn     { color: var(--yellow); }
+  .t-fn       { color: #fbbf24; }
+  .t-class    { color: #f472b6; }
+  .t-op       { color: var(--text-dim); }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 2px;
+    background: var(--border);
+    flex-shrink: 0;
+    position: relative;
+    cursor: col-resize;
+    transition: background 0.2s;
+  }
+  .divider:hover { background: var(--border-hi); }
+  .divider::after {
+    content: '⇄';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--surface);
+    color: var(--text-dim);
+    font-size: 11px;
+    padding: 4px 2px;
+    border: 1px solid var(--border-hi);
+  }
+
+  /* ── STATUS BAR ── */
+  .statusbar {
+    height: 28px;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 20px;
+    flex-shrink: 0;
+  }
+
+  .sb-item {
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .sb-item span { color: var(--text); }
+
+  .sb-sep {
+    width: 1px;
+    height: 14px;
+    background: var(--border);
+  }
+
+  /* ── UNTRANSLATED WARNING ── */
+  .untranslated {
+    display: inline;
+  }
+  .untranslated .t-warn {
+    text-decoration: underline dotted var(--yellow);
+  }
+
+  /* ── PLACEHOLDER ── */
+  .placeholder-msg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    pointer-events: none;
+  }
+  .placeholder-msg .big {
+    font-size: 28px;
+    opacity: 0.04;
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    letter-spacing: 4px;
+  }
+  .placeholder-msg .small {
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 1px;
+    margin-top: 8px;
+  }
+
+  /* changed lines get a brief amber highlight instead of a full flash */
+  .output-area > span {
+    display: block;
+    transition: background-color 0.4s ease;
+  }
+  .output-area > span.line-changed {
+    background-color: rgba(255, 123, 58, 0.10);
+  }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border-hi); border-radius: 2px; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="logo-py">PYTHON</span>
+    <span class="logo-sep">→</span>
+    <span class="logo-cpp">C++</span>
+  </div>
+  <div class="status-bar-top">
+    <div class="badge">ROS 2 + EUFS</div>
+    <div class="status-dot"></div>
+    <div class="status-label">Live Translation</div>
+  </div>
+</header>
+
+<div class="workspace">
+
+  <!-- LEFT: Python Input -->
+  <div class="panel panel-left" id="leftPanel">
+    <div class="panel-header">
+      <div class="panel-tag"><div class="dot"></div>INPUT · Python</div>
+      <div class="line-count" id="pyLineCount">1 line</div>
+    </div>
+    <div class="editor-wrap">
+      <div class="line-nums" id="pyLineNums">1</div>
+      <textarea id="pyInput" spellcheck="false" autocorrect="off" autocapitalize="off"
+        placeholder="# Paste or type ROS2 Python code here…"></textarea>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- RIGHT: C++ Output -->
+  <div class="panel panel-right" id="rightPanel">
+    <div class="panel-header">
+      <div class="panel-tag"><div class="dot"></div>OUTPUT · C++</div>
+      <div class="panel-actions">
+        <div class="line-count" id="cppLineCount">0 lines</div>
+        <button class="btn-copy" id="copyBtn" onclick="copyOutput()">Copy</button>
+      </div>
+    </div>
+    <div class="editor-wrap" style="position:relative;">
+      <div class="line-nums" id="cppLineNums">–</div>
+      <div class="output-area" id="cppOutput">
+        <div class="placeholder-msg">
+          <div class="big">C++</div>
+          <div class="small">start typing python on the left</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="statusbar">
+  <div class="sb-item">ROS2 RULESET <span>v2.0</span></div>
+  <div class="sb-sep"></div>
+  <div class="sb-item">IMPORTS <span id="sbImports">0</span></div>
+  <div class="sb-sep"></div>
+  <div class="sb-item">UNTRANSLATED <span id="sbUntranslated">0</span></div>
+  <div class="sb-sep"></div>
+  <div class="sb-item">ENGINE <span>rule-based</span></div>
+</div>
+
+<script>
+// ─────────────────────────────────────────────
+//  ROS2 TRANSLATION RULESET
+// ─────────────────────────────────────────────
+
+// Import mappings: python module → C++ includes
+const IMPORT_MAP = {
+  // Core ROS2
+  'rclpy':                        ['rclcpp/rclcpp.hpp'],
+  'rclpy.node':                   ['rclcpp/rclcpp.hpp'],
+  'rclpy.executors':              ['rclcpp/executors.hpp'],
+  'rclpy.callback_groups':        ['rclcpp/callback_group.hpp'],
+  'rclpy.parameter':              ['rclcpp/parameter.hpp'],
+  'rclpy.timer':                  ['rclcpp/timer.hpp'],
+  'rclpy.clock':                  ['rclcpp/clock.hpp'],
+  'rclpy.duration':               ['rclcpp/duration.hpp'],
+  'rclpy.time':                   ['rclcpp/time.hpp'],
+  'rclpy.qos':                    ['rclcpp/qos.hpp'],
+  'rclpy.logging':                ['rclcpp/logging.hpp'],
+
+  // Common message packages
+  'std_msgs.msg':                 ['std_msgs/msg/string.hpp', 'std_msgs/msg/int32.hpp',
+                                   'std_msgs/msg/float64.hpp', 'std_msgs/msg/bool.hpp',
+                                   'std_msgs/msg/header.hpp'],
+  'std_msgs.msg.String':          ['std_msgs/msg/string.hpp'],
+  'std_msgs.msg.Int32':           ['std_msgs/msg/int32.hpp'],
+  'std_msgs.msg.Float64':         ['std_msgs/msg/float64.hpp'],
+  'std_msgs.msg.Bool':            ['std_msgs/msg/bool.hpp'],
+  'std_msgs.msg.Header':          ['std_msgs/msg/header.hpp'],
+  'std_msgs.msg.Int8':            ['std_msgs/msg/int8.hpp'],
+  'std_msgs.msg.Int16':           ['std_msgs/msg/int16.hpp'],
+  'std_msgs.msg.Int64':           ['std_msgs/msg/int64.hpp'],
+  'std_msgs.msg.UInt32':          ['std_msgs/msg/u_int32.hpp'],
+  'std_msgs.msg.Float32':         ['std_msgs/msg/float32.hpp'],
+  'std_msgs.msg.ColorRGBA':       ['std_msgs/msg/color_rgba.hpp'],
+
+  // geometry_msgs
+  'geometry_msgs.msg':            ['geometry_msgs/msg/pose.hpp', 'geometry_msgs/msg/twist.hpp',
+                                   'geometry_msgs/msg/point.hpp'],
+  'geometry_msgs.msg.Pose':       ['geometry_msgs/msg/pose.hpp'],
+  'geometry_msgs.msg.PoseStamped':['geometry_msgs/msg/pose_stamped.hpp'],
+  'geometry_msgs.msg.Twist':      ['geometry_msgs/msg/twist.hpp'],
+  'geometry_msgs.msg.TwistStamped':['geometry_msgs/msg/twist_stamped.hpp'],
+  'geometry_msgs.msg.Point':      ['geometry_msgs/msg/point.hpp'],
+  'geometry_msgs.msg.Point32':    ['geometry_msgs/msg/point32.hpp'],
+  'geometry_msgs.msg.Vector3':    ['geometry_msgs/msg/vector3.hpp'],
+  'geometry_msgs.msg.Quaternion': ['geometry_msgs/msg/quaternion.hpp'],
+  'geometry_msgs.msg.Transform':  ['geometry_msgs/msg/transform.hpp'],
+  'geometry_msgs.msg.TransformStamped':['geometry_msgs/msg/transform_stamped.hpp'],
+  'geometry_msgs.msg.Accel':      ['geometry_msgs/msg/accel.hpp'],
+  'geometry_msgs.msg.Wrench':     ['geometry_msgs/msg/wrench.hpp'],
+
+  // sensor_msgs
+  'sensor_msgs.msg':              ['sensor_msgs/msg/image.hpp', 'sensor_msgs/msg/laser_scan.hpp'],
+  'sensor_msgs.msg.Image':        ['sensor_msgs/msg/image.hpp'],
+  'sensor_msgs.msg.CompressedImage': ['sensor_msgs/msg/compressed_image.hpp'],
+  'sensor_msgs.msg.LaserScan':    ['sensor_msgs/msg/laser_scan.hpp'],
+  'sensor_msgs.msg.PointCloud2':  ['sensor_msgs/msg/point_cloud2.hpp'],
+  'sensor_msgs.msg.Imu':         ['sensor_msgs/msg/imu.hpp'],
+  'sensor_msgs.msg.NavSatFix':    ['sensor_msgs/msg/nav_sat_fix.hpp'],
+  'sensor_msgs.msg.JointState':   ['sensor_msgs/msg/joint_state.hpp'],
+  'sensor_msgs.msg.BatteryState': ['sensor_msgs/msg/battery_state.hpp'],
+  'sensor_msgs.msg.Temperature':  ['sensor_msgs/msg/temperature.hpp'],
+  'sensor_msgs.msg.Range':        ['sensor_msgs/msg/range.hpp'],
+  'sensor_msgs.msg.FluidPressure':['sensor_msgs/msg/fluid_pressure.hpp'],
+
+  // nav_msgs
+  'nav_msgs.msg':                 ['nav_msgs/msg/odometry.hpp', 'nav_msgs/msg/path.hpp'],
+  'nav_msgs.msg.Odometry':        ['nav_msgs/msg/odometry.hpp'],
+  'nav_msgs.msg.Path':            ['nav_msgs/msg/path.hpp'],
+  'nav_msgs.msg.OccupancyGrid':   ['nav_msgs/msg/occupancy_grid.hpp'],
+  'nav_msgs.msg.MapMetaData':     ['nav_msgs/msg/map_meta_data.hpp'],
+
+  // action_msgs / lifecycle
+  'action_msgs.msg':              ['action_msgs/msg/goal_status.hpp'],
+  'lifecycle_msgs.msg':           ['lifecycle_msgs/msg/state.hpp'],
+  'lifecycle_msgs.srv':           ['lifecycle_msgs/srv/change_state.hpp'],
+
+  // tf2
+  'tf2_ros':                      ['tf2_ros/transform_broadcaster.h', 'tf2_ros/transform_listener.h'],
+  'tf2_ros.transform_broadcaster':['tf2_ros/transform_broadcaster.h'],
+  'tf2_ros.transform_listener':   ['tf2_ros/transform_listener.h'],
+  'tf2_ros.buffer':               ['tf2_ros/buffer.h'],
+  'tf2_ros.static_transform_broadcaster': ['tf2_ros/static_transform_broadcaster.h'],
+  'tf2':                          ['tf2/transform_datatypes.h'],
+  'tf2.transform_datatypes':      ['tf2/transform_datatypes.h'],
+  'tf2_geometry_msgs':            ['tf2_geometry_msgs/tf2_geometry_msgs.hpp'],
+
+  // Services
+  'std_srvs.srv':                 ['std_srvs/srv/empty.hpp', 'std_srvs/srv/set_bool.hpp',
+                                   'std_srvs/srv/trigger.hpp'],
+  'std_srvs.srv.Empty':           ['std_srvs/srv/empty.hpp'],
+  'std_srvs.srv.SetBool':         ['std_srvs/srv/set_bool.hpp'],
+  'std_srvs.srv.Trigger':         ['std_srvs/srv/trigger.hpp'],
+
+  // eufs_msgs — messages
+  'eufs_msgs.msg':                                        ['eufs_msgs/msg/bounding_box.hpp'],
+  'eufs_msgs.msg.BoundingBox':                            ['eufs_msgs/msg/bounding_box.hpp'],
+  'eufs_msgs.msg.BoundingBoxes':                          ['eufs_msgs/msg/bounding_boxes.hpp'],
+  'eufs_msgs.msg.CanState':                               ['eufs_msgs/msg/can_state.hpp'],
+  'eufs_msgs.msg.CarForces':                              ['eufs_msgs/msg/car_forces.hpp'],
+  'eufs_msgs.msg.CarState':                               ['eufs_msgs/msg/car_state.hpp'],
+  'eufs_msgs.msg.ChassisCommand':                         ['eufs_msgs/msg/chassis_command.hpp'],
+  'eufs_msgs.msg.ChassisState':                           ['eufs_msgs/msg/chassis_state.hpp'],
+  'eufs_msgs.msg.ConeArray':                              ['eufs_msgs/msg/cone_array.hpp'],
+  'eufs_msgs.msg.ConeArrayWithCovariance':                ['eufs_msgs/msg/cone_array_with_covariance.hpp'],
+  'eufs_msgs.msg.ConeAssociation':                        ['eufs_msgs/msg/cone_association.hpp'],
+  'eufs_msgs.msg.ConeAssociationArray':                   ['eufs_msgs/msg/cone_association_array.hpp'],
+  'eufs_msgs.msg.ConeAssociationArrayArrayStamped':       ['eufs_msgs/msg/cone_association_array_array_stamped.hpp'],
+  'eufs_msgs.msg.ConeAssociationArrayStamped':            ['eufs_msgs/msg/cone_association_array_stamped.hpp'],
+  'eufs_msgs.msg.ConeWithColorProbability':               ['eufs_msgs/msg/cone_with_color_probability.hpp'],
+  'eufs_msgs.msg.ConeWithColorProbabilityArray':          ['eufs_msgs/msg/cone_with_color_probability_array.hpp'],
+  'eufs_msgs.msg.ConeWithCovariance':                     ['eufs_msgs/msg/cone_with_covariance.hpp'],
+  'eufs_msgs.msg.Costmap':                                ['eufs_msgs/msg/costmap.hpp'],
+  'eufs_msgs.msg.CpuStatus':                              ['eufs_msgs/msg/cpu_status.hpp'],
+  'eufs_msgs.msg.CpuUsage':                               ['eufs_msgs/msg/cpu_usage.hpp'],
+  'eufs_msgs.msg.EKFErr':                                 ['eufs_msgs/msg/ekf_err.hpp'],
+  'eufs_msgs.msg.EKFState':                               ['eufs_msgs/msg/ekf_state.hpp'],
+  'eufs_msgs.msg.FullState':                              ['eufs_msgs/msg/full_state.hpp'],
+  'eufs_msgs.msg.Heartbeat':                              ['eufs_msgs/msg/heartbeat.hpp'],
+  'eufs_msgs.msg.IntegrationErr':                         ['eufs_msgs/msg/integration_err.hpp'],
+  'eufs_msgs.msg.LapStats':                               ['eufs_msgs/msg/lap_stats.hpp'],
+  'eufs_msgs.msg.MPCState':                               ['eufs_msgs/msg/mpc_state.hpp'],
+  'eufs_msgs.msg.NodeState':                              ['eufs_msgs/msg/node_state.hpp'],
+  'eufs_msgs.msg.NodeStateArray':                         ['eufs_msgs/msg/node_state_array.hpp'],
+  'eufs_msgs.msg.OSS':                                    ['eufs_msgs/msg/oss.hpp'],
+  'eufs_msgs.msg.Particle':                               ['eufs_msgs/msg/particle.hpp'],
+  'eufs_msgs.msg.ParticleSLAM':                           ['eufs_msgs/msg/particle_slam.hpp'],
+  'eufs_msgs.msg.ParticleSLAMStamped':                    ['eufs_msgs/msg/particle_slam_stamped.hpp'],
+  'eufs_msgs.msg.ParticleStamped':                        ['eufs_msgs/msg/particle_stamped.hpp'],
+  'eufs_msgs.msg.PathIntegralParams':                     ['eufs_msgs/msg/path_integral_params.hpp'],
+  'eufs_msgs.msg.PathIntegralStats':                      ['eufs_msgs/msg/path_integral_stats.hpp'],
+  'eufs_msgs.msg.PathIntegralStatus':                     ['eufs_msgs/msg/path_integral_status.hpp'],
+  'eufs_msgs.msg.PathIntegralTiming':                     ['eufs_msgs/msg/path_integral_timing.hpp'],
+  'eufs_msgs.msg.PlanningMode':                           ['eufs_msgs/msg/planning_mode.hpp'],
+  'eufs_msgs.msg.PointArray':                             ['eufs_msgs/msg/point_array.hpp'],
+  'eufs_msgs.msg.PointArrayStamped':                      ['eufs_msgs/msg/point_array_stamped.hpp'],
+  'eufs_msgs.msg.PurePursuitCheckpoint':                  ['eufs_msgs/msg/pure_pursuit_checkpoint.hpp'],
+  'eufs_msgs.msg.PurePursuitCheckpointArrayStamped':      ['eufs_msgs/msg/pure_pursuit_checkpoint_array_stamped.hpp'],
+  'eufs_msgs.msg.Runstop':                                ['eufs_msgs/msg/runstop.hpp'],
+  'eufs_msgs.msg.SLAMErr':                                ['eufs_msgs/msg/slam_err.hpp'],
+  'eufs_msgs.msg.SLAMState':                              ['eufs_msgs/msg/slam_state.hpp'],
+  'eufs_msgs.msg.StateMachineState':                      ['eufs_msgs/msg/state_machine_state.hpp'],
+  'eufs_msgs.msg.StereoImage':                            ['eufs_msgs/msg/stereo_image.hpp'],
+  'eufs_msgs.msg.SystemStatus':                           ['eufs_msgs/msg/system_status.hpp'],
+  'eufs_msgs.msg.TopicStatus':                            ['eufs_msgs/msg/topic_status.hpp'],
+  'eufs_msgs.msg.VehicleCommands':                        ['eufs_msgs/msg/vehicle_commands.hpp'],
+  'eufs_msgs.msg.VehicleCommandsStamped':                 ['eufs_msgs/msg/vehicle_commands_stamped.hpp'],
+  'eufs_msgs.msg.Waypoint':                               ['eufs_msgs/msg/waypoint.hpp'],
+  'eufs_msgs.msg.WaypointArrayStamped':                   ['eufs_msgs/msg/waypoint_array_stamped.hpp'],
+  'eufs_msgs.msg.WheelOdometryErr':                       ['eufs_msgs/msg/wheel_odometry_err.hpp'],
+  'eufs_msgs.msg.WheelSpeeds':                            ['eufs_msgs/msg/wheel_speeds.hpp'],
+  'eufs_msgs.msg.WheelSpeedsStamped':                     ['eufs_msgs/msg/wheel_speeds_stamped.hpp'],
+
+  // eufs_msgs — services
+  'eufs_msgs.srv':                                        ['eufs_msgs/srv/get_map.hpp'],
+  'eufs_msgs.srv.GetMap':                                 ['eufs_msgs/srv/get_map.hpp'],
+  'eufs_msgs.srv.RecordStart':                            ['eufs_msgs/srv/record_start.hpp'],
+  'eufs_msgs.srv.RecordStop':                             ['eufs_msgs/srv/record_stop.hpp'],
+  'eufs_msgs.srv.Register':                               ['eufs_msgs/srv/register.hpp'],
+  'eufs_msgs.srv.SetCanState':                            ['eufs_msgs/srv/set_can_state.hpp'],
+  'eufs_msgs.srv.SetMission':                             ['eufs_msgs/srv/set_mission.hpp'],
+  'eufs_msgs.srv.SetString':                              ['eufs_msgs/srv/set_string.hpp'],
+  'eufs_msgs.srv.SetTrack':                               ['eufs_msgs/srv/set_track.hpp'],
+
+  // Common Python stdlib mappings
+  'math':                         ['cmath'],
+  'time':                         ['chrono', 'thread'],
+  'sys':                          ['cstdlib'],
+  'os':                           ['unistd.h'],
+  'functools':                    ['functional'],
+  'typing':                       null, // no direct equivalent
+  'enum':                         ['cstdint'],
+  'threading':                    ['thread', 'mutex'],
+  'copy':                         ['algorithm'],
+  'struct':                       ['cstring'],
+  'json':                         null,
+};
+
+// Python type → C++ type
+const TYPE_MAP = {
+  'str': 'std::string',
+  'int': 'int',
+  'float': 'double',
+  'bool': 'bool',
+  'list': 'std::vector',
+  'dict': 'std::map',
+  'tuple': 'std::tuple',
+  'None': 'void',
+  'True': 'true',
+  'False': 'false',
+  'self': 'this',
+};
+
+// Python Node base → C++ Node base
+const NODE_INHERIT_MAP = {
+  'Node': 'rclcpp::Node',
+};
+
+// ─────────────────────────────────────────────
+//  TRANSLATION ENGINE
+// ─────────────────────────────────────────────
+
+function translate(pyCode) {
+  const lines = pyCode.split('\n');
+  const result = [];
+  const collectedIncludes = [];
+  const collectedIncludesSet = new Set();
+
+  let untranslatedCount = 0;
+  let importCount = 0;
+
+  // ── Scope stack ───────────────────────────────────────────────────────────
+  const scopeStack = [];
+
+  function closeScopes(currentIndentLen) {
+    while (scopeStack.length > 0) {
+      const top = scopeStack[scopeStack.length - 1];
+      if (currentIndentLen <= top.indentLen) {
+        scopeStack.pop();
+        const cls2 = Array.isArray(top.closeLines) ? top.closeLines : [top.closeLines];
+        cls2.forEach(cl => {
+          result.push({ type: 'line', tokens: [{ cls: 't-plain', text: ' '.repeat(top.indentLen) + cl }] });
+        });
+      } else break;
+    }
+  }
+
+  function pushScope(indentLen, closeStrOrLines) {
+    scopeStack.push({ indentLen, closeLines: Array.isArray(closeStrOrLines) ? closeStrOrLines : [closeStrOrLines] });
+  }
+
+  // ── Pre-scan: extract member variable declarations from __init__ ──────────
+  function scanMemberDecls(bodyLines, classIndent) {
+    const members = new Map();
+    const initIndent = classIndent + 4;
+    const bodyIndent = classIndent + 8;
+    let inInit = false;
+    for (const raw of bodyLines) {
+      const trimmed = raw.trim();
+      if (!trimmed) continue;
+      const il = raw.match(/^(\s*)/)[1].length;
+      if (il === initIndent && trimmed.match(/^def\s+__init__/)) { inInit = true; continue; }
+      if (il <= initIndent && !trimmed.match(/^def\s+__init__/)) { inInit = false; }
+      if (!inInit || il !== bodyIndent) continue;
+      const pub = trimmed.match(/^(?:self\.)?([\w_]+)\s*=\s*(?:self\.)?create_publisher\s*\(\s*(\w+[\.\w]*)\s*,/);
+      if (pub) { members.set(pub[1], { cppType: `rclcpp::Publisher<${toCppMsgType(pub[2])}>::SharedPtr` }); continue; }
+      const sub = trimmed.match(/^(?:self\.)?([\w_]+)\s*=\s*(?:self\.)?create_subscription\s*\(\s*(\w+[\.\w]*)\s*,/);
+      if (sub) { members.set(sub[1], { cppType: `rclcpp::Subscription<${toCppMsgType(sub[2])}>::SharedPtr` }); continue; }
+      const tmr = trimmed.match(/^(?:self\.)?([\w_]+)\s*=\s*(?:self\.)?create_timer\s*\(/);
+      if (tmr) { members.set(tmr[1], { cppType: 'rclcpp::TimerBase::SharedPtr' }); continue; }
+      const srv = trimmed.match(/^(?:self\.)?([\w_]+)\s*=\s*(?:self\.)?create_service\s*\(\s*(\w+[\.\w]*)\s*,/);
+      if (srv) { members.set(srv[1], { cppType: `rclcpp::Service<${toCppMsgType(srv[2])}>::SharedPtr` }); continue; }
+    }
+    return members;
+  }
+
+  // ── State ─────────────────────────────────────────────────────────────────
+  let inClass = false;
+  let className = '';
+  let baseClass = '';
+  let memberDecls = new Map();
+
+  // ── Main pass ─────────────────────────────────────────────────────────────
+  for (let i = 0; i < lines.length; i++) {
+    const raw = lines[i];
+    const trimmed = raw.trim();
+    const indentLen = raw.match(/^(\s*)/)[1].length;
+    const indent = ' '.repeat(indentLen);
+
+    if (trimmed === '') {
+      result.push({ type: 'line', tokens: [{ cls: 't-plain', text: '' }] });
+      continue;
+    }
+
+    if (trimmed.startsWith('#')) {
+      closeScopes(indentLen);
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent },
+        { cls: 't-comment', text: '// ' + trimmed.slice(1).trim() }
+      ]});
+      continue;
+    }
+
+    if (isImportLine(trimmed)) {
+      const resolved = resolveImport(trimmed);
+      resolved.forEach(inc => {
+        if (!collectedIncludesSet.has(inc)) { collectedIncludesSet.add(inc); collectedIncludes.push(inc); importCount++; }
+      });
+      if (resolved.length === 0) {
+        untranslatedCount++;
+        result.push({ type: 'line', tokens: [{ cls: 't-comment', text: indent + '// ' + trimmed + '  \u2190 unmapped import' }] });
+      } else {
+        result.push({ type: 'skip' });
+      }
+      continue;
+    }
+
+    closeScopes(indentLen);
+
+    // ── CLASS DEFINITION ──────────────────────────────────────────────────
+    const classMatch = trimmed.match(/^class\s+(\w+)\s*(?:\(([^)]*)\))?\s*:/);
+    if (classMatch) {
+      // Add new line before class definition for neatness
+      result.push({ type: 'line', tokens: [{ cls: 't-plain', text: indent + '\n' }] });
+      className = classMatch[1];
+      const pyBase = classMatch[2] ? classMatch[2].trim() : '';
+      baseClass = NODE_INHERIT_MAP[pyBase] || pyBase;
+      inClass = true;
+      memberDecls = scanMemberDecls(lines.slice(i + 1), indentLen);
+
+      const tokens = [
+        { cls: 't-plain', text: indent },
+        { cls: 't-keyword', text: 'class ' },
+        { cls: 't-class', text: className },
+      ];
+      if (baseClass) {
+        tokens.push({ cls: 't-plain', text: ' : public ' });
+        tokens.push({ cls: 't-type', text: baseClass });
+      }
+      result.push({ type: 'line', tokens });
+      result.push({ type: 'line', tokens: [{ cls: 't-plain', text: indent + '{' }] });
+
+      // private: member variable forward declarations
+      if (memberDecls.size > 0) {
+        result.push({ type: 'line', tokens: [{ cls: 't-keyword', text: indent + 'private:' }] });
+        memberDecls.forEach(({ cppType }, varName) => {
+          result.push({ type: 'line', tokens: [
+            { cls: 't-plain', text: indent + '  ' },
+            { cls: 't-type', text: cppType },
+            { cls: 't-plain', text: ' ' + varName + ';' },
+          ]});
+        });
+        result.push({ type: 'line', tokens: [{ cls: 't-plain', text: '' }] });
+      }
+
+      result.push({ type: 'line', tokens: [{ cls: 't-keyword', text: indent + 'public:' }] });
+      pushScope(indentLen, '};  // class ' + className);
+      continue;
+    }
+
+    // ── __init__ → constructor ─────────────────────────────────────────────
+    const initMatch = trimmed.match(/^def\s+__init__\s*\(self(?:,\s*([^)]*))?\)\s*:/);
+    if (initMatch && inClass) {
+      const extraParams = initMatch[1] ? formatParams(initMatch[1]) : '';
+      const nodeName = guessNodeName(className);
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent },
+        { cls: 't-class', text: className },
+        { cls: 't-plain', text: '(' + (extraParams || '') + ')' },
+      ]});
+      if (baseClass && baseClass.includes('rclcpp::Node')) {
+        result.push({ type: 'line', tokens: [
+          { cls: 't-plain', text: indent + ': ' },
+          { cls: 't-type', text: baseClass },
+          { cls: 't-plain', text: '("' + nodeName + '")' },
+        ]});
+      }
+      result.push({ type: 'line', tokens: [{ cls: 't-plain', text: indent + '{' }] });
+      pushScope(indentLen, '}');
+      continue;
+    }
+
+    if (trimmed.match(/^super\(\)\.__init__\(/)) { result.push({ type: 'skip' }); continue; }
+
+    // ── other def ─────────────────────────────────────────────────────────
+    const defMatch = trimmed.match(/^def\s+(\w+)\s*\(([^)]*)\)\s*(?:->\s*(\w+))?\s*:/);
+    if (defMatch) {
+      if (defMatch[1] === '__del__') {
+        result.push({ type: 'line', tokens: [
+          { cls: 't-plain', text: indent + '~' },
+          { cls: 't-class', text: className },
+          { cls: 't-plain', text: '() {}' },
+        ]});
+        continue;
+      }
+      const fnName = defMatch[1];
+      const retType = defMatch[3] ? (TYPE_MAP[defMatch[3]] || defMatch[3]) : 'void';
+      const params = formatMethodParams(defMatch[2]);
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent },
+        { cls: 't-type', text: retType + ' ' },
+        { cls: 't-fn', text: fnName },
+        { cls: 't-plain', text: '(' + params + ')' },
+      ]});
+      result.push({ type: 'line', tokens: [{ cls: 't-plain', text: indent + '{' }] });
+      pushScope(indentLen, '}');
+      continue;
+    }
+
+    // ── if __name__ == '__main__' ──────────────────────────────────────────
+    if (trimmed === "if __name__ == '__main__':" || trimmed === 'if __name__ == "__main__":') {
+      result.push({ type: 'line', tokens: [
+        { cls: 't-keyword', text: indent + 'int ' },
+        { cls: 't-fn', text: 'main' },
+        { cls: 't-plain', text: '(int argc, char* argv[])' },
+      ]});
+      result.push({ type: 'line', tokens: [{ cls: 't-plain', text: indent + '{' }] });
+      pushScope(indentLen, ['    return 0;', '}']);
+      continue;
+    }
+
+    if (trimmed.match(/^rclpy\.init\s*\(/)) {
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent },
+        { cls: 't-fn', text: 'rclcpp::init' },
+        { cls: 't-plain', text: '(argc, argv);' },
+      ]});
+      continue;
+    }
+
+    const spinMatch = trimmed.match(/^rclpy\.spin\s*\(([^)]+)\)/);
+    if (spinMatch) {
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent },
+        { cls: 't-fn', text: 'rclcpp::spin' },
+        { cls: 't-plain', text: '(' + spinMatch[1].trim() + ');' },
+      ]});
+      continue;
+    }
+
+    const spinOnceMatch = trimmed.match(/^rclpy\.spin_once\s*\(([^)]+)\)/);
+    if (spinOnceMatch) {
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent },
+        { cls: 't-fn', text: 'rclcpp::spin_some' },
+        { cls: 't-plain', text: '(' + spinOnceMatch[1].trim() + ');' },
+      ]});
+      continue;
+    }
+
+    if (trimmed.match(/^rclpy\.shutdown\s*\(/)) {
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent },
+        { cls: 't-fn', text: 'rclcpp::shutdown' },
+        { cls: 't-plain', text: '();' },
+      ]});
+      continue;
+    }
+
+    if (trimmed.match(/^rclpy\.ok\s*\(/)) {
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent },
+        { cls: 't-fn', text: 'rclcpp::ok' },
+        { cls: 't-plain', text: '()' },
+      ]});
+      continue;
+    }
+
+    const nodeInstMatch = trimmed.match(/^(\w+)\s*=\s*(\w+)\s*\(\)/);
+    if (nodeInstMatch) {
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent },
+        { cls: 't-keyword', text: 'auto ' },
+        { cls: 't-plain', text: nodeInstMatch[1] + ' = std::make_shared<' },
+        { cls: 't-class', text: nodeInstMatch[2] },
+        { cls: 't-plain', text: '>();' },
+      ]});
+      continue;
+    }
+
+    // // // Detects: CONSTANT_NAME = value (handles math and comments)
+    // const constantMatch = trimmed.match(/^([A-Z_][A-Z0-9_]*)\s*=\s*([^#\n]+)/);
+    // if (constantMatch && !trimmed.includes('self.')) {
+    //     const varName = constantMatch[1];
+    //     let expression = constantMatch[2].trim();
+
+    //     // Convert Python/NumPy math to C++ <cmath> equivalents
+    //     expression = expression
+    //         .replace(/np\.sin/g, 'std::sin')
+    //         .replace(/np\.cos/g, 'std::cos')
+    //         .replace(/np\.radians\(([^)]+)\)/g, '($1 * M_PI / 180.0)');
+
+    //     // Ensure numeric-only integers are treated as doubles (e.g., -5 -> -5.0)
+    //     if (/^-?\d+$/.test(expression)) {
+    //         expression += ".0";
+    //     }
+
+    //     // Correct Map method to track that this variable is now defined
+    //     memberDecls.set(varName, 'double');
+
+    //     result.push({
+    //         type: 'line',
+    //         tokens: [
+    //           { cls: 't-plain', text: indent + (`${varName} = ${expression};`) }
+    //         ]
+    //     });
+    //     continue;
+    // }
+
+    // This regex captures: 1. The name (with quotes) 2. The default value
+    const declareParamaterMatch = trimmed.match(/^self\.declare_parameter\(\s*(["']?[\w]+["']?)\s*,\s*([\w.'"()\[\]]+)\s*\)/);
+    if (declareParamaterMatch) {
+      // 1. Clean up quotes from the name if necessary
+      const rawVarName = declareParamaterMatch[1].replace(/['"]/g, ''); 
+      
+      // 2. Determine the C++ Type (You'll need a helper to map Python values to C++ types)
+      const defaultValue = declareParamaterMatch[2];
+      const msgType = toCppMsgType(defaultValue); 
+      
+      const declared = memberDecls.has(rawVarName);
+
+      result.push({ 
+        type: 'line', 
+        tokens: [
+          // If not declared in header, add the SharedPtr type prefix
+          { cls: 't-plain', text: indent + (declared ? '' : `this->declare_paramater("${rawVarName}", ${msgType});`) }
+        ]
+      });
+      continue;
+    }
+
+    // ── self.create_publisher ─────────────────────────────────────────────
+    const pubMatch = trimmed.match(/^(?:self\.)?([\w_]+)\s*=\s*(?:self\.)?create_publisher\s*\(\s*(\w+[\.\w]*),\s*['"]([^'"]+)['"]\s*,\s*(\d+)\s*\)/);
+    if (pubMatch) {
+      const msgType = toCppMsgType(pubMatch[2]);
+      const varName = pubMatch[1];
+      const declared = memberDecls.has(varName);
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent + (declared ? '' : `rclcpp::Publisher<${msgType}>::SharedPtr `) },
+        { cls: 't-plain', text: varName + ' = this->create_publisher<' },
+        { cls: 't-type', text: msgType },
+        { cls: 't-plain', text: '>(' },
+        { cls: 't-string', text: '"' + pubMatch[3] + '"' },
+        { cls: 't-plain', text: ', ' + pubMatch[4] + ');' },
+      ]});
+      continue;
+    }
+
+    // ── self.create_subscription ──────────────────────────────────────────
+    const subMatch = trimmed.match(/^(?:self\.)?([\w_]+)\s*=\s*(?:self\.)?create_subscription\s*\(\s*(\w+[\.\w]*),\s*['"]([^'"]+)['"]\s*,\s*([\w.]+)\s*,\s*(\d+)\s*\)/);
+    if (subMatch) {
+      const msgType = toCppMsgType(subMatch[2]);
+      const varName = subMatch[1];
+      const callback = subMatch[4].replace('self.', '');
+      const declared = memberDecls.has(varName);
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent + (declared ? '' : `rclcpp::Subscription<${msgType}>::SharedPtr `) },
+        { cls: 't-plain', text: varName + ' = this->create_subscription<' },
+        { cls: 't-type', text: msgType },
+        { cls: 't-plain', text: '>(' },
+        { cls: 't-string', text: '"' + subMatch[3] + '"' },
+        { cls: 't-plain', text: ', ' + subMatch[5] + ', std::bind(&' },
+        { cls: 't-class', text: className },
+        { cls: 't-plain', text: '::' + callback + ', this, std::placeholders::_1));' },
+      ]});
+      continue;
+    }
+
+    // ── self.create_timer ─────────────────────────────────────────────────
+    const timerMatch = trimmed.match(/^(?:self\.)?([\w_]+)\s*=\s*(?:self\.)?create_timer\s*\(\s*([\d.]+)\s*,\s*([\w.]+)\s*\)/);
+    if (timerMatch) {
+      const varName = timerMatch[1];
+      const callback = timerMatch[3].replace('self.', '');
+      const declared = memberDecls.has(varName);
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent + (declared ? '' : 'rclcpp::TimerBase::SharedPtr ') },
+        { cls: 't-plain', text: varName + ' = this->create_wall_timer(' },
+        { cls: 't-plain', text: 'std::chrono::duration<double>(' + timerMatch[2] + '), std::bind(&' },
+        { cls: 't-class', text: className },
+        { cls: 't-plain', text: '::' + callback + ', this));' },
+      ]});
+      continue;
+    }
+
+    // ── self.create_service ───────────────────────────────────────────────
+    const srvMatch = trimmed.match(/^(?:self\.)?([\w_]+)\s*=\s*(?:self\.)?create_service\s*\(\s*(\w+[\.\w]*),\s*['"]([^'"]+)['"]\s*,\s*([\w.]+)\s*\)/);
+    if (srvMatch) {
+      const srvType = toCppMsgType(srvMatch[2]);
+      const varName = srvMatch[1];
+      const callback = srvMatch[4].replace('self.', '');
+      const declared = memberDecls.has(varName);
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent + (declared ? '' : `rclcpp::Service<${srvType}>::SharedPtr `) },
+        { cls: 't-plain', text: varName + ' = this->create_service<' },
+        { cls: 't-type', text: srvType },
+        { cls: 't-plain', text: '>(' },
+        { cls: 't-string', text: '"' + srvMatch[3] + '"' },
+        { cls: 't-plain', text: ', std::bind(&' },
+        { cls: 't-class', text: className },
+        { cls: 't-plain', text: '::' + callback + ', this, std::placeholders::_1, std::placeholders::_2));' },
+      ]});
+      continue;
+    }
+
+    const pubCallMatch = trimmed.match(/^(?:self\.)?([\w_]+)\.publish\((.+)\)/);
+    if (pubCallMatch) {
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent + pubCallMatch[1] + '->publish(' + pubCallMatch[2] + ');' },
+      ]});
+      continue;
+    }
+
+    const logMatch = trimmed.match(/^(?:self\.)?get_logger\(\)\.(info|warn|error|debug|fatal)\s*\((.+)\)/);
+    if (logMatch) {
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent },
+        { cls: 't-fn', text: 'RCLCPP_' + logMatch[1].toUpperCase() },
+        { cls: 't-plain', text: '(this->get_logger(), ' + logMatch[2] + ');' },
+      ]});
+      continue;
+    }
+
+    if (trimmed === 'return' || trimmed === 'return None') {
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent },
+        { cls: 't-keyword', text: 'return' },
+        { cls: 't-plain', text: ';' },
+      ]});
+      continue;
+    }
+    const returnMatch = trimmed.match(/^return\s+(.+)$/);
+    if (returnMatch) {
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent },
+        { cls: 't-keyword', text: 'return ' },
+        { cls: 't-plain', text: returnMatch[1] + ';' },
+      ]});
+      continue;
+    }
+
+    if (trimmed === 'pass') {
+      result.push({ type: 'line', tokens: [{ cls: 't-comment', text: indent + '// pass' }] });
+      continue;
+    }
+
+    const printMatch = trimmed.match(/^print\((.+)\)$/);
+    if (printMatch) {
+      result.push({ type: 'line', tokens: [
+        { cls: 't-plain', text: indent },
+        { cls: 't-type', text: 'std::cout' },
+        { cls: 't-plain', text: ' << ' + printMatch[1] + ' << ' },
+        { cls: 't-type', text: 'std::endl' },
+        { cls: 't-plain', text: ';' },
+      ]});
+      continue;
+    }
+
+    untranslatedCount++;
+    result.push({ type: 'line', tokens: [
+      { cls: 't-comment', text: indent + '// [?] ' + trimmed },
+    ], untranslated: true });
+  }
+
+  closeScopes(0);
+
+  const includeTokens = [];
+  collectedIncludes.forEach(inc => {
+    includeTokens.push({ cls: 't-include', text: '#include <' + inc + '>' });
+  });
+  if (includeTokens.length === 0) {
+    includeTokens.push({ cls: 't-comment', text: '// No recognized imports yet' });
+  }
+
+  return { result, includeTokens, importCount, untranslatedCount };
+}
+// ─────────────────────────────────────────────
+//  HELPERS
+// ─────────────────────────────────────────────
+
+function isImportLine(s) {
+  return s.startsWith('import ') || s.startsWith('from ');
+}
+
+function resolveImport(line) {
+  // "import rclpy"
+  const m1 = line.match(/^import\s+([\w.]+)/);
+  if (m1) {
+    const key = m1[1];
+    return lookupIncludes(key);
+  }
+  // "from rclpy.node import Node"
+  const m2 = line.match(/^from\s+([\w.]+)\s+import\s+(.+)/);
+  if (m2) {
+    const mod = m2[1];
+    const names = m2[2].split(',').map(n => n.trim());
+    const incs = new Set();
+    // Try full path first: module.Name
+    names.forEach(name => {
+      const full = mod + '.' + name;
+      lookupIncludes(full).forEach(i => incs.add(i));
+    });
+    // Then module-level
+    if (incs.size === 0) lookupIncludes(mod).forEach(i => incs.add(i));
+    return [...incs];
+  }
+  return [];
+}
+
+function lookupIncludes(key) {
+  if (IMPORT_MAP[key] === null) return []; // known but unmappable
+  if (IMPORT_MAP[key]) return IMPORT_MAP[key];
+  // try parent
+  const parts = key.split('.');
+  while (parts.length > 1) {
+    parts.pop();
+    const parent = parts.join('.');
+    if (IMPORT_MAP[parent] === null) return [];
+    if (IMPORT_MAP[parent]) return IMPORT_MAP[parent];
+  }
+  return [];
+}
+
+function toCppMsgType(pyType) {
+  // e.g. "String" → "std_msgs::msg::String"
+  // Already qualified like "std_msgs.msg.String" → "std_msgs::msg::String"
+  return pyType.replace(/\./g, '::');
+}
+
+function guessNodeName(className) {
+  // MyNode → my_node
+  return className.replace(/([A-Z])/g, m => '_' + m.toLowerCase()).replace(/^_/, '');
+}
+
+function formatParams(raw) {
+  return raw.split(',').map(p => {
+    p = p.trim();
+    const [name, def] = p.split('=');
+    return 'auto ' + name.trim();
+  }).join(', ');
+}
+
+function formatMethodParams(raw) {
+  const params = raw.split(',').map(p => p.trim()).filter(p => p && p !== 'self');
+  if (params.length === 0) return '';
+  return params.map(p => {
+    const colonIdx = p.indexOf(':');
+    if (colonIdx >= 0) {
+      const name = p.slice(0, colonIdx).trim();
+      const type = p.slice(colonIdx + 1).trim();
+      return (TYPE_MAP[type] || type) + ' ' + name;
+    }
+    return 'auto ' + p;
+  }).join(', ');
+}
+
+// ─────────────────────────────────────────────
+//  RENDER
+// ─────────────────────────────────────────────
+
+function renderTokens(tokens) {
+  return tokens.map(t => `<span class="${t.cls}">${escHtml(t.text)}</span>`).join('');
+}
+
+function escHtml(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+// ─────────────────────────────────────────────
+//  DOM RECONCILER — only patches lines that changed
+// ─────────────────────────────────────────────
+
+// Holds the inner-HTML string for each rendered output line so we can diff
+
+function updateOutput() {
+  const pyCode = document.getElementById('pyInput').value;
+  const outEl = document.getElementById('cppOutput');
+  const lineNumEl = document.getElementById('cppLineNums');
+
+  if (!pyCode.trim()) {
+    // Clear via reconciler so existing lines fade out gracefully
+    reconcileLines(outEl, []);
+    _prevLineHTMLs = [];
+    // clear line nums
+    while (lineNumEl.firstChild) lineNumEl.removeChild(lineNumEl.firstChild);
+    document.getElementById('sbImports').textContent = '0';
+    document.getElementById('sbUntranslated').textContent = '0';
+    document.getElementById('cppLineCount').textContent = '0 lines';
+    // Show placeholder only when truly empty
+    if (!outEl.querySelector('.placeholder-msg')) {
+      const ph = document.createElement('div');
+      ph.className = 'placeholder-msg';
+      ph.innerHTML = '<div class="big">C++</div><div class="small">start typing python on the left</div>';
+      outEl.appendChild(ph);
+    }
+    return;
+  }
+
+  // Remove placeholder if present
+  const ph = outEl.querySelector('.placeholder-msg');
+  if (ph) ph.remove();
+
+  const { result, includeTokens, importCount, untranslatedCount } = translate(pyCode);
+
+  // Build flat array of {innerHtml, lineNum} for every visible output line
+  const newLines = [];   // array of inner-HTML strings (what goes inside each <span>)
+  const lineNums = [];
+  let lineNum = 1;
+
+  // Include block at top
+  includeTokens.forEach(tok => {
+    newLines.push(renderTokens([tok]));
+    lineNums.push(lineNum++);
+  });
+  newLines.push(''); // blank separator
+  lineNums.push(lineNum++);
+
+  // Translated body
+  result.forEach(item => {
+    if (item.type === 'skip') return;
+    newLines.push(renderTokens(item.tokens));
+    lineNums.push(lineNum++);
+  });
+
+  // Reconcile DOM
+  reconcileLines(outEl, newLines);
+  _prevLineHTMLs = newLines;
+
+  // Line numbers: use span elements to match the output's line-height exactly
+  reconcileLineNums(lineNumEl, lineNums);
+
+  const total = newLines.length;
+  document.getElementById('cppLineCount').textContent = total + (total === 1 ? ' line' : ' lines');
+  document.getElementById('sbImports').textContent = importCount;
+  document.getElementById('sbUntranslated').textContent = untranslatedCount;
+}
+
+/**
+ * Reconcile the child <span> elements of `container` against `newLines`.
+ * - Lines whose innerHTML hasn't changed → untouched (no repaint)
+ * - Changed lines → innerHTML updated + brief highlight class
+ * - Extra old lines → removed
+ * - New lines needed → appended
+ */
+function reconcileLines(container, newLines) {
+  const existing = container.children;
+
+  // Update / add
+  for (let i = 0; i < newLines.length; i++) {
+    const html = newLines[i];
+    if (i < existing.length) {
+      const el = existing[i];
+      if (el.innerHTML !== html) {
+        el.innerHTML = html;
+        // Trigger highlight: remove then re-add on next frame
+        el.classList.remove('line-changed');
+        // Use rAF so the class removal actually commits before we re-add
+        requestAnimationFrame(() => {
+          el.classList.add('line-changed');
+          setTimeout(() => el.classList.remove('line-changed'), 400);
+        });
+      }
+    } else {
+      const span = document.createElement('span');
+      span.innerHTML = html;
+      container.appendChild(span);
+    }
+  }
+
+  // Remove surplus lines from the bottom up
+  while (container.children.length > newLines.length) {
+    container.removeChild(container.lastChild);
+  }
+}
+
+/**
+ * Reconcile line number <span> elements against an array of numbers.
+ * Same diffing approach — only adds/removes, never rebuilds wholesale.
+ */
+function reconcileLineNums(container, nums) {
+  const existing = container.children;
+  for (let i = 0; i < nums.length; i++) {
+    const text = String(nums[i]);
+    if (i < existing.length) {
+      if (existing[i].textContent !== text) existing[i].textContent = text;
+    } else {
+      const s = document.createElement('span');
+      s.textContent = text;
+      container.appendChild(s);
+    }
+  }
+  while (container.children.length > nums.length) {
+    container.removeChild(container.lastChild);
+  }
+}
+function updatePyLineNums() {
+  const lines = document.getElementById('pyInput').value.split('\n');
+  const count = lines.length;
+  reconcileLineNums(document.getElementById('pyLineNums'), Array.from({length: count}, (_, i) => i + 1));
+  document.getElementById('pyLineCount').textContent = count + (count === 1 ? ' line' : ' lines');
+}
+
+// ── Copy to clipboard ──
+function copyOutput() {
+  const spans = document.getElementById('cppOutput').querySelectorAll('span');
+  const text = Array.from(spans).map(s => s.textContent).join('\n');
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('copyBtn');
+    btn.textContent = 'Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'Copy';
+      btn.classList.remove('copied');
+    }, 1500);
+  });
+}
+
+// ── Events ──
+const input = document.getElementById('pyInput');
+input.addEventListener('input', () => {
+  updatePyLineNums();
+  updateOutput();
+});
+input.addEventListener('keydown', e => {
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    const s = input.selectionStart, end = input.selectionEnd;
+    input.value = input.value.slice(0, s) + '    ' + input.value.slice(end);
+    input.selectionStart = input.selectionEnd = s + 4;
+    updatePyLineNums();
+    updateOutput();
+  }
+});
+
+// Sync scroll between input and line nums
+input.addEventListener('scroll', () => {
+  document.getElementById('pyLineNums').scrollTop = input.scrollTop;
+});
+document.getElementById('cppOutput').addEventListener('scroll', function() {
+  document.getElementById('cppLineNums').scrollTop = this.scrollTop;
+});
+
+// ── Seed with example ──
+let _prevLineHTMLs = [];
+const EXAMPLE = `import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String
+from geometry_msgs.msg import Twist
+from sensor_msgs.msg import LaserScan
+from eufs_msgs.msg import ConeArray, CarState, WheelSpeedsStamped
+from eufs_msgs.msg import VehicleCommands, ConeArrayWithCovariance
+from eufs_msgs.srv import SetMission, GetMap
+
+class MyRobotNode(Node):
+    def __init__(self):
+        super().__init__('my_robot_node')
+        self.publisher_ = self.create_publisher(String, 'chatter', 10)
+        self.subscriber_ = self.create_subscription(LaserScan, 'scan', self.scan_callback, 10)
+        self.cmd_pub_ = self.create_publisher(Twist, 'cmd_vel', 10)
+        self.cone_sub_ = self.create_subscription(ConeArray, '/cones', self.cone_callback, 10)
+        self.vehicle_pub_ = self.create_publisher(VehicleCommands, '/vehicle_cmd', 10)
+        self.timer_ = self.create_timer(0.5, self.timer_callback)
+
+    def timer_callback(self):
+        get_logger().info('Timer fired!')
+
+    def scan_callback(self, msg):
+        get_logger().warn('Got scan data')
+
+    def cone_callback(self, msg):
+        get_logger().info('Got cone array')
+
+if __name__ == '__main__':
+    rclpy.init()
+    node = MyRobotNode()
+    rclpy.spin(node)
+    rclpy.shutdown()
+`;
+
+input.value = EXAMPLE;
+updatePyLineNums();
+updateOutput();
+</script>
+</body>
+</html>
