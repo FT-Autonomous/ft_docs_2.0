@@ -1,12 +1,12 @@
 ### Note:
 
 Its important to note that this is only a guide to migrate from Python to C++, not necessarily a mandatory read.
-Many people prefer to work with Python for its dynamic types, but besides user readability C++ is the most optimal language for robotics as C++ is much closer to assembly language, both in terms of structure and performance.
+Many people prefer to work with Python for its dynamic types, but besides user readability, C++ is the most optimal language for robotics as C++ is much closer to assembly language, both in terms of structure and performance.
 
 ## Reasons for wanting to migrate:
 
 - C++ code runs miles faster than Python
-- No dynamic types ( you know excatly what every variable should be storing )
+- No dynamic types ( you know exactly what every variable should be storing )
 - A very good way to understand how your code is actually working, and whether or not there are any mistakes in your current code.
 - Avoiding bottle necks in performance for small but necessary ROS2 nodes and packages
 

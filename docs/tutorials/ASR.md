@@ -26,7 +26,7 @@ There must always be a qualified Autonomous Systems Responsible person (ASR) pre
 
 The ASR must keep the RES strapped securely around their waist and on their person at all times while the ADS-DV is active. It must not be held in one hand, put down, or moved out of immediate reach.
 
-*"Keep the thing attached and held on you in the reasonable fashion. If you can't immediately press the E-Stop button in less than half a second, your probably wearing it wrong"*
+*"Keep the thing attached and held on you in a reasonable fashion. If you can't immediately press the E-Stop button in less than half a second, your probably wearing it wrong"*
 
 ### If there is anyting you get from this document, remember this:
 
