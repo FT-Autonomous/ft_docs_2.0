@@ -151,6 +151,7 @@ nav: # This is the structure of the sidebar
 
   - Tutorials:
       - Getting Started Guide: tutorials/Getting_started.md
+      - Onboarding Videos: tutorials/onboarding_videos.md
       - Cutting Bags Down to Size: tutorials/cutting_bags.md
       - Competition Launch Scripts; Configuration, Setup and Running them: tutorials/comp_launch_scripts.md
       - Reducing Boot Time: tutorials/reducing_boot_time.md
@@ -162,6 +163,7 @@ nav: # This is the structure of the sidebar
       - LiDAR Setup: tutorials/lidar_setup.md
       - YOLO Training: tutorials/yolo_training.md
       - Webpage Setup: tutorials/webpage_setup.md
+      - The role of the ASR: tutorials/ASR.md
 
   - Equipment:
       - ADS-DV Vehicle: equipment/ads_dv.md
