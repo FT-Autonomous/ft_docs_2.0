@@ -14,6 +14,31 @@
 - Always include meaningful alt text for accessibility
 - Store images in the `media/` directory relative to your markdown file
 
+#### Adding diagrams
+
+- [Mermaid](https://mermaid.ai/open-source) can be used to easily create diagrams to explain systems, create flowcharts, etc.
+- In order to add a Mermaid diagram into a page:
+    1. Start a new line with triple backticks and the codeword `mermaid`.
+    2. Type the diagram using the Mermaid syntax
+    3. End on a new line with triple backticks
+- For example:
+````
+```mermaid
+graph LR
+    hello --> world
+    world --> again
+    again --> hello
+```
+````
+Becomes
+```mermaid
+graph LR
+    hello --> world
+    world --> again
+    again --> hello
+```
+- Reference the [Mermaid documentation](https://mermaid.ai/open-source/intro/) to learn more about how you can use Mermaid.
+
 ### Keeping Documentation up to Date
 
 In general you will encounter cases where documentation is inadequate / out of date when people start complaining or asking questions. It can be very easy to issue a temporary fix or give a verbal explanation in this case but it's always best to incorporate such issues in the docs.
