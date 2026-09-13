@@ -22,7 +22,7 @@
     2. Type the diagram using the Mermaid syntax
     3. End on a new line with triple backticks
 - For example:
-````
+````markdown
 ```mermaid
 graph LR
     hello --> world
