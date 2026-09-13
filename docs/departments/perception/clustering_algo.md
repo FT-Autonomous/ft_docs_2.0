@@ -416,14 +416,14 @@ Despite these, the pipeline provides a strong foundation for autonomous track pe
 
 ```mermaid
 flowchart TD
-    A[LiDAR /velodyne_points] --> B[ROI Filter]
-    B --> C[Ground Plane Removal<br>(via /cluster/plane_model)]
-    C --> D[Cluster Non-Ground Points]
-    D --> E[Color Classification<br>(optional)]
-    E --> F[Publish ConeArrayWithCovariance<br>/cones/lidar]
-    C --> G[/cluster/filtered_point_cloud]
-    D --> H[/cluster/cluster_cloud]
-    A --> I[/cluster/ransac_point_cloud]
+    A["LiDAR /velodyne_points"] --> B["ROI Filter"]
+    B --> C["Ground Plane Removal<br>(via /cluster/plane_model)"]
+    C --> D["Cluster Non-Ground Points"]
+    D --> E["Color Classification<br>(optional)"]
+    E --> F["Publish ConeArrayWithCovariance<br>/cones/lidar"]
+    C --> G["/cluster/filtered_point_cloud"]
+    D --> H["/cluster/cluster_cloud"]
+    A --> I["/cluster/ransac_point_cloud"]
 ```
 
 ---
