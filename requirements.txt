@@ -14,4 +14,6 @@ mkdocs-material-extensions>=1.3
 #Zoom in for pictures
 mkdocs-glightbox
 
+# Mermaid diagrams plugin
+mkdocs-mermaid2-plugin
 

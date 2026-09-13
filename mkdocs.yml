@@ -44,7 +44,11 @@ markdown_extensions:
   - attr_list
   - footnotes
   - pymdownx.details
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid_custom
   - md_in_html 
   - pymdownx.tabbed:
       alternate_style: true
@@ -69,6 +73,7 @@ plugins:
       custom_format: "%b %d, %Y"   # e.g. "Oct 17, 2025"
       timezone: Europe/Dublin
       locale: en
+  - mermaid2
     
 
 nav: # This is the structure of the sidebar
