@@ -79,7 +79,7 @@ plugins:
 nav: # This is the structure of the sidebar
   - Home: index.md
   - Hall of Fame: hall_of_fame.md
-  - Departments:
+  - Software:
       - Perception:
             - Overview: departments/perception/overview.md
             - Theory: departments/perception/theory.md
@@ -125,17 +125,21 @@ nav: # This is the structure of the sidebar
                       - Lunchy: departments/hardware/mechanical/mount/lunchy.md
                       - Modem: departments/hardware/mechanical/mount/modem.md
                   - Rigby: departments/hardware/mechanical/rigby.md
-  - ADS:
-      - Systems Integration:
-            - Overview: ads/systems_integration/overview.md
-            - Computer Placement: ads/systems_integration/computer_placement.md
-            - Zed2i Placement: ads/systems_integration/zed2i_placement.md
-            - LiDar Placement: ads/systems_integration/lidar_placement.md
-      - AI/ADS Interface:
-            - Overview: ads/aiads_interface/overview.md
-            - Raspberry Pi Setup: ads/aiads_interface/raspberrypi.md
-      - Actuation Control:
-            - Overview: ads/actuation_control/overview.md
+  - Hardware:
+      - Automotive:
+            -Overview: hardware/automotive/overview.md
+      - Mechatronics:
+            -Overview: hardware/mechatronics/overview.md
+      - Electronics:
+            - Overview: ads/electronics/overview.md
+      - Integration:
+            - Overview: ads/integration/overview.md
+            - Computer Placement: ads/integration/computer_placement.md
+            - Zed2i Placement: ads/integration/zed2i_placement.md
+            - LiDar Placement: ads/integration/lidar_placement.md
+      - Interface:
+            - Overview: ads/interface/overview.md
+            - Raspberry Pi Setup: ads/interface/raspberrypi.md
   - Resources:
       - General Competition Info: resources/competition.md
       - General Git Info: resources/git.md
