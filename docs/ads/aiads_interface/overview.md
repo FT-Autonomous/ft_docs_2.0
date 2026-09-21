@@ -11,8 +11,8 @@ Interface is the layer that stands between the control team on software and the 
 ```mermaid
 graph LR
     subgraph Ethernet
-        JT["Jetson"]
-        PI["Raspberry Pi"]
+        JT["Autonomous Software Stack Jetson"]
+        PI["Raspberry Pi/Jetson"]
         NT["Nanotec N5"]
         JT <--> PI
         PI <--> NT
@@ -71,7 +71,7 @@ graph LR
   - Each of the ESPs listed in the diagram needs to be programmed to deal with targets for its relevant domain and be able to adjust itself to achieve those (PID?)
   - Each of the ESPs needs to be able to communicate over CAN bus a unified. This uses a 20AWG twisted pair as the wire, an Adafruit CAN Pal on each ESP32, the inbuilt TWAI controller driver using a prexisting [library](https://github.com/collin80/esp32_can). The twisted pair needs to be terminated with 120 omhs.
 
-### Raspberry Pi
+### Raspberry Pi/Jetson
   - Is a ROS node that forwards on the instructions gotten from control's node via CAN using the PCAN LINK.
   - Returns details such as actual wheel angle, speed, etc, up the chain by publishing it.
   - Using [ros2nix](https://github.com/wentasah/ros2nix) would be nice to minimise issues relating to setting up multiple redundant devices and migrating from one to another. This will also help to deal with compatability issues of ROS with different versions of Linux and reduce unessicary time spent compiling from source.
