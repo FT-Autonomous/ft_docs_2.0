@@ -74,4 +74,4 @@ graph LR
 ### Raspberry Pi
   - Is a ROS node that forwards on the instructions gotten from control's node via CAN using the PCAN LINK.
   - Returns details such as actual wheel angle, speed, etc, up the chain by publishing it.
-  - Using [ros2nix](https://github.com/wentasah/ros2nix) would be nice to minimise issues relating to setting up multiple redundant devices and migrating from one to another.
+  - Using [ros2nix](https://github.com/wentasah/ros2nix) would be nice to minimise issues relating to setting up multiple redundant devices and migrating from one to another. This will also help to deal with compatability issues of ROS with different versions of Linux and reduce unessicary time spent compiling from source.
