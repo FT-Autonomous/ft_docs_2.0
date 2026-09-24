@@ -30,7 +30,6 @@ graph LR
         SE["Steering ESP"]
         CE["Clutch ESP"]
         GE["Gear ESP"]
-        BE["Break ESP"]
         HE["HMI ESP"]
         AHE["Auxillary Health ESP"]
         DS["DEWEsoft Logger"]
@@ -44,14 +43,12 @@ graph LR
         SE .-> AS
         CE .-> AS
         GE .-> AS
-        BE .-> AS
         HE .-> AS
         ME .-> AS
         PK <--> TE
         PK <--> SE
         PK <--> CE
         PK <--> GE
-        PK <--> BE
         PK <--> HE
         PK <--> AHE
         PK <--> AS
