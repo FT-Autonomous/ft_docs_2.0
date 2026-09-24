@@ -134,6 +134,7 @@ nav: # This is the structure of the sidebar
       - AI/ADS Interface:
             - Overview: ads/aiads_interface/overview.md
             - Raspberry Pi Setup: ads/aiads_interface/raspberrypi.md
+            - Autonomous System Break: ads/aiads_interface/asb.md
       - Actuation Control:
             - Overview: ads/actuation_control/overview.md
   - Resources:
