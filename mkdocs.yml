@@ -74,6 +74,15 @@ plugins:
       timezone: Europe/Dublin
       locale: en
   - mermaid2
+  - redirects:
+      redirect_maps:
+        ads/systems_integration/overview.md: systems/integration/overview.md
+        ads/systems_integration/computer_placement.md: systems/integration/computer_placement.md
+        ads/systems_integration/zed2i_placement.md: systems/integration/zed2i_placement.md
+        ads/systems_integration/lidar_placement.md: systems/integration/lidar_placement.md
+        ads/aiads_interface/overview.md: systems/interface/overview.md
+        ads/aiads_interface/raspberrypi.md: systems/interface/raspberrypi.md
+        ads/actuation_control/overview.md: systems/electronics/overview.md
     
 
 nav: # This is the structure of the sidebar
@@ -125,21 +134,21 @@ nav: # This is the structure of the sidebar
                       - Lunchy: departments/hardware/mechanical/mount/lunchy.md
                       - Modem: departments/hardware/mechanical/mount/modem.md
                   - Rigby: departments/hardware/mechanical/rigby.md
-  - Hardware:
+  - Systems:
       - Automotive:
-            -Overview: hardware/automotive/overview.md
+            - Overview: systems/automotive/overview.md
       - Mechatronics:
-            -Overview: hardware/mechatronics/overview.md
+            - Overview: systems/mechatronics/overview.md
       - Electronics:
-            - Overview: ads/electronics/overview.md
+            - Overview: systems/electronics/overview.md
       - Integration:
-            - Overview: ads/integration/overview.md
-            - Computer Placement: ads/integration/computer_placement.md
-            - Zed2i Placement: ads/integration/zed2i_placement.md
-            - LiDar Placement: ads/integration/lidar_placement.md
+            - Overview: systems/integration/overview.md
+            - Computer Placement: systems/integration/computer_placement.md
+            - Zed2i Placement: systems/integration/zed2i_placement.md
+            - LiDar Placement: systems/integration/lidar_placement.md
       - Interface:
-            - Overview: ads/interface/overview.md
-            - Raspberry Pi Setup: ads/interface/raspberrypi.md
+            - Overview: systems/interface/overview.md
+            - Raspberry Pi Setup: systems/interface/raspberrypi.md
   - Resources:
       - General Competition Info: resources/competition.md
       - General Git Info: resources/git.md

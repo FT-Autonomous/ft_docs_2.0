@@ -17,3 +17,6 @@ mkdocs-glightbox
 # Mermaid diagrams plugin
 mkdocs-mermaid2-plugin
 
+# Preserve existing ADS page URLs after the Systems reorganisation.
+mkdocs-redirects==1.2.2
+
