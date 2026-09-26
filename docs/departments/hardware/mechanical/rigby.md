@@ -1,13 +1,9 @@
-# Rigby my beloved
+# Rigby
 
-Rigby is our internal car developed to simulate the ADS-DV car so we can test the AI stack prior to competition. A breakdown of the electrical workings of Rigby can be found in the [Electronics](../electronics/electronics_overview.md) section. This section outlines the mechanical workings of the car.
-## Parts List  
+Rigby now has its own section because its work continued after Hardware finished.
 
-### Purchasable Parts  
-- {need to find where the parts were gotten, for now ask Senan}  
+Start with the [Rigby overview](../../rigby/overview.md), then use the [mechanical guide](../../rigby/mechanical.md), [CAD and printing guide](../../rigby/cad.md), or [software overview](../../rigby/software/overview.md).
 
-### 3d-Printed Parts  
-- Encoder Wheel Mount (with inserts)  
-- Potentiometer Connection motor joint  
-- Gear Box (if broken, no file to replace. Needs to be recreated (26/27 job) - Vaseline lubricant)  
-- {need to discuss with people, for now ask Senan} 
+The [drivetrain page](../../rigby/drivetrain.md) covers the recent gearbox fit prototype. The [testing status](../../rigby/testing.md) separates completed checks from work that still needs commissioning.
+
+This page remains so older Hardware links still lead to the right place.

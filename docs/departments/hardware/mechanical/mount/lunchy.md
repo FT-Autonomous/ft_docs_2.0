@@ -1,95 +1,63 @@
-# Lunchy 
-*pictures will be added to aid explanations later*
+# Lunchy
 
-Naming system:  
-- **Basey** is the base of Lunchy, it is a 4mm thick base that is screwed onto the base plate.  
-- **Lunchy** is the main envelope of the weatherproofing box - it is the part holding the sponsor panels.  
-- **Liddy** is the slidable roof for Lunchy which covers both the top of the box and the vent to protect it from rain.  
-  
-## Design Features  
-Main internal area of the box is **150x150x150** mm + the 30mm slanted roof, so one wall is 150 mm in height, one is 180 mm in height, and the other 2 are mirrored slopes from 150-180 mm sides.  
-There is an additional **40mm extrusion on the back for wiring**. It is sloped outwards eliptically with the furthest distance being the 40mm measurement.  
-The 30mm gap created (and subsequently overhung by Liddy to protect from rain) allows for airflow of the parts.  
-All sharp edges possible are filleted or champered for ease of printing (<u>NOTE FOR MECHANICAL BEFORE SUMMER 2026, CHECK FSAI RULES ON CORNERS, I THINK EXTERNAL NEED MINIMUM 1mm EDGE</u>).  
-For the first 5mm of the build area there is a raised internal wall around the edge, reducing the build area to approximately 147.8 x 147.8 mm. This is done to ensure that Basey and Lunchy fit seamlessly together and align correctly for screwing it in.  
-Basey has a small slit on 2 of the corners, which should allow for slightly increased flexibility if the fit for Lunchy is tight.  
-There is a small slit in Basey at the front for the wires for the LiDAR to fit through.  
-The positioning of the screw holes for Basey/Lunchy are in their location for a specific purpose. They are sticking to the sides to allow maximum clearance at the front/rear of the casing. The front screw holes are put around the corners where most of the force would be applied evenly and where the walls of Lunchy are least interupted (being 4mm thick at this point, compared to 2mm at other points). At the rear, they are pushed forward 25mm to allow Lunchy to hang slighly off the plate with the screws themselves being approximately 30mm from the rear. When referring to the rear, the rear is meant as back of the box excluding the extrusion to allow for cabling (ie rear of the main build area).  
+Lunchy was the weather shell around the competition compute module. [Brainy](brainy.md) held the hardware; Lunchy kept rain off it and gave us covers we could remove for access. Separating those jobs meant that opening the box did not mean dismantling the computer rack.
 
-A note on airflow: if modifying the computer casing, ensure that little or no PLA filament is touching the Jetson or LiDAR directly, and preferably leave a gap betweeen the components. PLA has a glass transition temperature of 55-60 degrees and loses structural integrity at around 50 degrees.  
-  
-An internal chasis will be designed (like a computer rack style thing) to house the components which should be able to attach and detach independent of Lunchy's main body.  
-Basey (the base of Lunchy) will be a permanent part of the computer chasis, being transferred with the computer when needed, such as between the AI car and the ADS car.  
+![Finished Lunchy shell, July 2026](../../../../media/hardware/mechanical/mount/lunchy-built-july-2026.jpg)
 
-## Design Process Logs
-*Documentation wasn't done on V1-V3*  
+*The printed shell (July 2026), rather than a CAD render. This photograph is preserved at its original framing.*
 
-### LunchyV4
-Lunchy 4 won't work as built, and new ideas need to be added at the beginning.
-#### Why it won't work:
-- It looks hella ugly.
-- The vent should be split in 2 and moved to the sides. Hot air gathers more there, and for structural integrity 2 smaller ones are better.
-- Dimensions are wrong for the camera as this year we are switching from the Zed 2 to the Zed 2i
+## The Parts
 
-#### What needs to be added.
-- Sponsor wall
-- Change to z2i camera (and maybe make that mount a separate part).
-- Considering making an internal ribbed part holder.
+| Name | Purpose |
+| --- | --- |
+| Basey | Located the shell and connected the module to the main plate |
+| Body | Main enclosure around Brainy |
+| Booty | Rear cable cover, separated from the body in the later design |
+| Liddy | Sliding roof over the upper opening and vent |
+| Sponsor panels | Replaceable faces, so graphics did not require a whole new body |
 
-### LunchyV5
-#### Active fixes needed in V5:
-- It looks hella ugly.
-- The vent should be split in 2 and moved to the sides. Hot air gathers more there, and for structural integrity 2 smaller ones are better.
-- Dimensions are wrong for the camera as this year we are switching from the Zed 2 to the Zed 2i
+![Exploded Lunchy assembly](../../../../media/hardware/mechanical/mount/lunchy_exploded.png)
 
+## Space, Airflow and Rain
 
-#### Goals for V5:
-- Add sponsorship tile compatibility
-- Add 1mm to each Lunchy dimenstion, then make the wall 3mm thick, finally cut back wall by 1mm on the smooth edges. 
-- Divide the wall out to add the 3mm holes for sponsor wall.
-- Add a computer frame that can fit within lunchy - "Skips"
-- Accommodate Z2i in Skips and Lunchy cutout
+The V8 design increased the nominal internal space from `150 x 150 x 150 mm` to `180 x 180 x 150 mm`, with a further 30 mm roof slope. One wall was therefore 150 mm high and the opposite wall 180 mm high. These are design dimensions, not a measured guarantee of the clear space in a finished print.
 
-#### Choices made in V5:
-- Maximized creating fillets on any long straight corner - this reduces elephant footing and warping in the 3d printing process.
-- I am concerned that the number of holes on each side might reduce the waterproofing, I know they will be covered with sponsors, but it is an extra point of failure.
-- will create alternate Lunchy where each panel is one side of the case, then we can fuck with sponsors on that panel. Body stays the same each year, but panel gets reprinted.
+The extra 40 mm rear cable section mattered. Earlier versions could contain the devices but left too little room to plug them in. Booty provided a sheltered exit without forcing all the cables to bend immediately against a wall. Making the entire back removable would have weakened the shell; splitting off the cable cover kept more of the main box intact.
 
+![Sheltered roof and ventilation gap](../../../../media/hardware/mechanical/mount/lunchy_airflow.png)
 
-*Now after Christmas trying to fix design, confident 5 would have printed, however I am unhappy with the sponsor tile solution.Want to try a picture frame solution so will create V6, hopefully reusing all same dimensions from V5 except wall thickness to 4mm (2mm back, 1mm plate, 1mm frame) to accommodate.*
+Liddy sheltered a ventilation gap instead of sealing hot electronics in a closed box. The enclosure was intended to shed rain, not provide an IP-rated waterproof compartment. No ingress or thermal qualification is recorded here. Panel removal also changed the cooling and weather protection, so an open bench arrangement was not equivalent to the covered installation.
 
-### LunchyV6
-#### Main changes:
-- potentially an O-ring design might work printed out of TPU or used just around where the openings are. Biggest question is where they will go. Perhaps best if they go around where the holes go and we use screws with fasteners to ensure a tight fit to Lunchy.
-- I also want to explore adding the camera mount as an attachment to the base plate.
+## Base and Fasteners
 
-#### Plan after reviewing logistics
-- Having screws interface with the sponsor board 
-- Do a picture frame design, covered in the Lunchy MS Whiteboard.
-- Focus on adding camera mount to base plate secondly as should be easier concept to incorporate into Lunchy (but separate thing to Lunchy).
+A 5 mm locating wall around the base helped the body seat consistently. Small corner slits gave Basey some compliance during fitting, and a front opening provided the LiDAR cable route.
 
-#### Still needed to change
-- Need to add in wall positioning for modem casing to slot
-- Need to add in screw holes for connecting base plate to lunchy body.
+The main Lunchy interface used **4 x M6**. Brainy connected into Lunchy with **4 x M6** as well. Captured nuts were used in printed M6 connections where possible. Check that the nuts are present and fully seated before assembling the shell; tightening harder does not fix a poorly seated nut or a cracked print.
 
+The mounting positions were moved towards the sides for access, while the rear fixings were brought forward to clear the corners of the main plate. That is why moving the entire box backwards was not an easy way to gain space.
 
-*(Note on naming of files - once I update a file from the previous model or remake it, the number changes to the current version. If the design ends up with 0 changes between version x and x+1, the name stays - product_x.)*
+## Files
 
-### LunchyV7
-#### Main idea:
-- After printing and testing of spacing, current Lunchy design is too small. Everything fits, but there is no clearance for wiring.
-- For cabling, we will add a tuxedo-style back to V7 so the wires can run out and down (matching how the top design looks.
-- For sponsor plates, the bottom piece was too flimsy and potentially unnecessary. Will attempt a design without it while using friction to keep the pieces in.
-- Screws to attach Lunchy to Basey and Basey to Base Plate will now extrude as they were too hard to access going in from side. This will also help with Lunchy design for ADS keeping it easier to install.
-- We will develop a separate test-bench style holder for the parts to be printed in PETG so they can stay together with/without Lunchy support (including Modem)
-- The front access for the LiDAR cable will now be in Basey
+Start in `CAD/Mount/Lunchy (Computer Casing)/`:
 
-#### Mid-Development log
-- New naming scheme implemented :D.
-- Tuxedo-style back added, decided that it doesn't need to go below where Lunchy already stops because we're simply protecting from water, not other elements.
-- Removed extra cabling things. Yet to add new cabling for front to Basey.
-- Left a small disconnect between tux and rest of box to allow compliant mechanism, I would fear random people operating it could snap, so gave it some built-in flex.
-- Had to adjust Liddy to be 2mm longer because it was off in previous versions.
-- Need to extend the flute (tuxedo) to be 2cm bigger, making it a 4cm extrusion, then will print and hopefully that's enough.
+- `Lunchy Assembly.SLDASM` and `Lunchy Exploded View.SLDASM` show how the parts fit.
+- `Basey Lunchy.SLDPRT`, `Body Lunchy.SLDPRT`, `Booty Lunchy.SLDPRT` and `Liddy Lunchy.SLDPRT` are the main parts.
+- `Halved Body Lunchy.SLDPRT` and `Right-SidePanel-OAI.SLDPRT` are later manufacturing/panel files.
+- `Lunchy Prototypes/LunchyV8/The LunchyV8.SLDASM` records the V8 design.
 
-*(Note, Basey is my new unofficial term for the Lunchy base plate, distinguishing it from the actual base plate Lunchy as a whole will be mounted on, naturally the lid will now be Liddy).
+Compare these with the [working and submitted mount assemblies](mount_overview.md#cad-and-submission-files) before reproducing an old export. The prototype number alone does not identify the exact July print.
+
+PETG was the intended competition material. The box surrounded warm electronics and was exposed outdoors, so material choice, colour, layer direction and fit mattered. The [printing notes](../3dprinting.md) explain what to preserve with a repeatable print.
+
+## Why There Are So Many Versions
+
+| Version | What changed or was learned |
+| --- | --- |
+| V1-V3 | Files were kept, but detailed design notes were not written. |
+| V4 | Vent geometry, appearance and camera dimensions needed revisiting for the Zed2i. |
+| V5 | Larger dimensions, thicker-wall thinking, rounded corners and sponsor tiles were explored. Holes for sponsor panels raised questions about rain entry. |
+| V6 | Picture-frame-style panels and sealing concepts were explored; camera support became a separate job rather than another feature of the shell. |
+| V7 | Test fitting exposed the missing cable space. The rear "tuxedo" cover, more accessible screws, Basey's front cable opening and revised Liddy followed. |
+| V8 | Internal space increased, Booty became a separate sliding piece, and the base gained the BrainyV3 interfaces. |
+
+The useful lesson was to model the cables and the space needed to fit them, not just the boxes. A device fitting inside Lunchy did not mean we could connect or remove it.

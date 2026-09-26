@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="580" viewBox="0 0 900 580" role="img" aria-labelledby="title description">
+  <title id="title">Rigby control routes</title>
+  <desc id="description">The Jetson sends requests through CAN or ROS. The ROCK host selects one runtime, receives ASSI reports and supports separately gated gamepad input. It connects over USB to the ESP32 drive and UNO steering controllers.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#62666d"/>
+    </marker>
+  </defs>
+  <rect width="900" height="580" rx="8" fill="#ffffff"/>
+  <g fill="none" stroke="#62666d" stroke-width="2.5" marker-end="url(#arrow)">
+    <path d="M400 80 V105 H215 V130"/>
+    <path d="M500 80 V105 H685 V130"/>
+    <path d="M215 200 V230 H385 V270"/>
+    <path d="M685 200 V230 H515 V270"/>
+    <path d="M230 310 H300"/>
+    <path d="M670 310 H600"/>
+    <path d="M390 350 V395 H290 V440"/>
+    <path d="M510 350 V395 H610 V440"/>
+  </g>
+  <g fill="#f5f5f5" stroke="#bfc1c5" stroke-width="1.5">
+    <rect x="330" y="20" width="240" height="60" rx="6"/>
+    <rect x="80" y="130" width="270" height="70" rx="6"/>
+    <rect x="550" y="130" width="270" height="70" rx="6"/>
+    <rect x="20" y="275" width="210" height="70" rx="6"/>
+    <rect x="670" y="275" width="210" height="70" rx="6"/>
+    <rect x="170" y="440" width="240" height="75" rx="6"/>
+    <rect x="490" y="440" width="240" height="75" rx="6"/>
+  </g>
+  <rect x="300" y="270" width="300" height="80" rx="6" fill="#fceceb" stroke="#c9433c" stroke-width="2"/>
+  <g text-anchor="middle" fill="#252830" font-family="Verdana, sans-serif" font-size="18">
+    <text x="450" y="47">Jetson</text>
+    <text x="450" y="68" font-size="14">Autonomous stack</text>
+    <text x="215" y="158">PEAK-CAN</text>
+    <text x="215" y="183" font-size="14">Default route</text>
+    <text x="685" y="158">ROS Ackermann</text>
+    <text x="685" y="183" font-size="14">Optional Ethernet route</text>
+    <text x="125" y="303">Nano ASSI</text>
+    <text x="125" y="328" font-size="14">Local state reports</text>
+    <text x="775" y="303">Gamepad</text>
+    <text x="775" y="328" font-size="14">Remote mission only</text>
+    <text x="450" y="302" font-weight="bold">ROCK4C+ host</text>
+    <text x="450" y="329" font-size="15">One selected runtime</text>
+    <text x="290" y="470">ESP32 drive</text>
+    <text x="290" y="498" font-size="14">USB serial / drive motor</text>
+    <text x="610" y="470">UNO steering</text>
+    <text x="610" y="498" font-size="14">USB serial / steering motor</text>
+    <text x="450" y="553" font-size="14" fill="#62666d">Control and reporting paths, not power wiring</text>
+  </g>
+</svg>

@@ -1,65 +1,29 @@
 # Hardware
 
-Hardware is the newest department to FT Autonomouts (as of Septermber 2025) and serves to build the autonomous test rig "Rigby" and to improve the sensor mount.
+Hardware brought together the mechanical and electronics work behind Rigby and our competition sensor mount. The department ran during the 2025/26 season and finished its work as a separate team in August 2026. These pages keep the designs, build notes and lessons from that work together.
 
-## Goals
-### General
-- Create and maintain a working test rig 'Rigby'.
-- Simulate a DDT car using Rigby.
-- Design interchangeable sensor mount for DDT car and Rigby.
-- Support rest of FT Autonomous with Hardware assistance.
-### Current year (2025/2026)
-#### Electronics
-- Implement potentiometer based control loop for steering system.
-- Finalise and implement communication protocols for Jetson to Jetson, and Jetson to Arduino communtications.
-- Integrate independant power supply for drive and steering motors onto rigby.
-#### Mechanical
-- mount poteentiometer to Rigby for control of steering.
-- Add a more permanant weatherproofing solution to the sensor mount.
-- Add mounting plate to Rigby, to give more space for onboard electronics and morot power supply.
+**Rigby is still being developed.** Its current [mechanical and software documentation](../rigby/overview.md) now has its own section. Start there if you are working on the test rig rather than looking back at the Hardware project.
 
-## GitHub Overview
-FT-Hardware  
-├─&nbsp;CAD  
-│&nbsp;&nbsp;├─&nbsp;Circuit&nbsp;Diagrams  
-│&nbsp;&nbsp;├─&nbsp;Comp&nbsp;Resources  
-│&nbsp;&nbsp;├─&nbsp;Mount  
-│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;[Design&nbsp;processes&nbsp;for&nbsp;printed&nbsp;mount&nbsp;components]  
-│&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;[Previous&nbsp;years'&nbsp;mounts]  
-│&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;[Current&nbsp;year's&nbsp;mount]  
-│&nbsp;&nbsp;└─&nbsp;Rigby  
-│&nbsp;&nbsp;&nbsp;&nbsp;├─&nbsp;3D&nbsp;Printed&nbsp;Parts&nbsp;(reproducible)  
-│&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;[SolidWorks&nbsp;files]  
-│&nbsp;&nbsp;&nbsp;&nbsp;├─&nbsp;Bought&nbsp;Parts&nbsp;(to&nbsp;be&nbsp;replaced)  
-│&nbsp;&nbsp;&nbsp;&nbsp;└─&nbsp;Printable&nbsp;Parts  
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─&nbsp;Bambu&nbsp;A1  
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;3MF  
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;GCODE  
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─&nbsp;Prusa  
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;├─&nbsp;3MF  
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;└─&nbsp;GCODE  
-│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─&nbsp;STL  
-│  
-└─&nbsp;Code  
-&nbsp;&nbsp;└─&nbsp;[WIP]  
+## What We Built
 
-## Previous Implementations
+The [competition mount](mechanical/mount/mount_overview.md) carried our sensors and compute hardware on the shared DDT car. The main changes were a removable internal rack, a printed weather shell, a supported camera stand and a compact switch enclosure. Brainy and the camera holder were printed for competition, followed by Lunchy's finished shell (July 2026).
 
-### 2022/2023
+Rigby's work covered the steering feedback and wheel encoder mounts, Platey and its electronics holders, the power and control hardware, and the assembled and exploded CAD. Drive and steering were demonstrated independently; work then continued on the vehicle interface, managed firmware and remote control in [FT-Rigby](https://github.com/FT-Autonomous/FT-Rigby). That ongoing work is not being marked complete just because Hardware has finished.
 
-Rigby was made summer 2023, so no Hardware work was done in this time period
+## Finding Things
 
-### 2023/2024
+| Looking for | Start here |
+| --- | --- |
+| Competition mount layout and component names | [Mechanical overview](mechanical/mechanical_overview.md) |
+| Lunchy, Brainy, Zeddy or SwitchyJr | [Competition mount](mechanical/mount/mount_overview.md) |
+| Original wiring, controller and power-system notes | [Electronics archive](electronics/electronics_overview.md) |
+| CAD checkout and Git LFS | [FT-Hardware CAD setup](mechanical/solidworks_setup.md) |
+| Current Rigby hardware, software and testing | [Rigby](../rigby/overview.md) |
 
-- First pass at a steering improvement on rigby, changed motor
-- First pass at electronics systems, steering angle feedback
+The CAD remains in [FT-Hardware](https://github.com/FT-Autonomous/FT-Hardware). The local working copy contains later, unpushed files, so a fresh GitHub clone does not yet reproduce every layout shown here. In particular, Rigby's later exploded assembly and its full assembly still need reconciling. The [CAD guide](../rigby/cad.md) explains which files to compare.
 
-### 2024/2025
-- Improve steering solution to remove toe out geometry
-- Redo electronics wiring
-- Implement feedback sensors and PID control, and modular control systems (Arduinos and Jetson)
+## Earlier Rigby Work
 
+Rigby began in summer 2023, before Hardware became a department. The 2023/24 work included a steering motor change and early steering-angle feedback. The following season focused on steering geometry, rewiring, feedback sensors and separate controllers for the motors. The 2025/26 work built on that rather than starting with a new vehicle.
 
-## Resources
-
-… (list of links here)
+These archived pages describe the arrangements used during the project. Older board names and wiring examples remain useful history, but are not instructions to replace the current Rigby installation.

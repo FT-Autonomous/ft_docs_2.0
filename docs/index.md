@@ -11,6 +11,10 @@ Welcome to the Formula Trinity documentation hub — everything from departments
 
 ## Useful Links
 
+- [Rigby](departments/rigby/overview.md): the active test vehicle, including its mechanical work, software and testing status.
+- [Systems](systems/integration/overview.md): the former ADS section.
+- [Hardware archive](departments/hardware/overview.md): the 2025/26 competition mount and original Hardware build notes.
+
 - Formula's very own stack over flow for any debugging: <https://stackoverflowteams.com/c/formula-trinity-autonomous/home>
 
 - How to write out a documentation website with all of its functionality in markdown: [Webpage Setup](tutorials/webpage_setup.md)

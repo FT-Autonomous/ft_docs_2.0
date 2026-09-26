@@ -1,14 +1,25 @@
 # Mechanical
 
+Mechanical handled the CAD, printed parts and physical packaging for Hardware. There were two closely related jobs: rebuilding the competition sensor mount and making Rigby easier to assemble, maintain and test.
+
+The competition mount project is recorded here as completed work. [Rigby](../../rigby/overview.md) continues separately, including its newer control software and drivetrain work.
+
 ## Competition Mount
-Below is documentation on the mount we use for comp. It will be updated regularly. Each item will have an overview explanation, then if it has any changes (such as having 3d-printed designs), then a design process log (development log) will be available below it.
 
-documentation system changed as of 01/02/2026, conor will add more stuff here at soem point, or else he will be fired.  
-&nbsp;&nbsp;&nbsp;&nbsp;Conor is wondering why he will be fired if he doesn't add more after already carrying documentation on his back D:
+The mount was designed around a simple split: Brainy held the equipment, Lunchy sheltered it, and the sensors had their own mounting points on the main plate. That let us remove the shell without dismantling the compute package, and replace a damaged print without remaking the entire mount.
 
-## Rigby (test car)  
+| Part | Job |
+| --- | --- |
+| [Lunchy](mount/lunchy.md) | Weather shell, removable lid and rear cable cover |
+| [Brainy](mount/brainy.md) | Internal rack for the compute and navigation hardware |
+| [Zeddy](mount/camera_module.md) | Supported stand for the Zed2i camera |
+| [LiDAR mount](mount/lidar.md) | Direct attachment of the VLP-16 to the plate |
+| [SwitchyJr](mount/power_control.md) | Power-control enclosure and its underside clamp |
 
-### Technical Specs  
-A complete SolidWorks version of Rigby is available in the GitHub and is updated regularly to ensure accuracy.  
-The Rigby folder is split between parts that we can manufacture (3d print) and parts we will need to buy to replace.  
-Over time, the below list will be updated to be accurate, if it disagrees with the Hardware github, assume this document to be incorrect.   
+Start with the [mount overview](mount/mount_overview.md) for the overall arrangement. The [reference sketches](mount/reference_sketches.md) explain the earlier concepts, while the [2026 DDT checks](mount/fs_ai_2026_mount_checks.md) record what needed demonstrating for the competition installation.
+
+## Working From the Files
+
+The [CAD setup](solidworks_setup.md) covers Git LFS and the OneDrive warning. SolidWorks itself is taught in person. The [printing reference](3dprinting.md) explains the source/export split and what to keep when reproducing a part.
+
+The submitted competition assembly is a snapshot, not a file to quietly update. Later working assemblies and print releases need to be compared with it when tracing what changed. File names such as `Final` or `ReleaseCandidate` are not, on their own, evidence that a part was fitted or tested.
