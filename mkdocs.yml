@@ -190,38 +190,39 @@ nav: # This is the structure of the sidebar
 
   - Miscellaneous:
       - Feedback: miscellaneous/feedback.md
-      - Archive:
-          - Overview: miscellaneous/archive/index.md
-          - Hardware:
-              - Overview: departments/hardware/overview.md
-              - Electronics:
-                  - Electronics Overview: departments/hardware/electronics/electronics_overview.md
-                  - Code:
-                      - Libraries:
-                          - FTSerial: departments/hardware/electronics/code/libraries/ftserial.md
-                      - Steering: departments/hardware/electronics/code/steering.md
-                      - Wokwi: departments/hardware/electronics/code/wokwi.md
-                  - Jetson Nano: departments/hardware/electronics/jetson_nano.md
-                  - Microcontrollers: departments/hardware/electronics/microcontrollers.md
-                  - Power Systems:
-                      - Wiring Loom: departments/hardware/electronics/power_systems/wiring_loom.md
-                      - Switchbox: departments/hardware/electronics/power_systems/switchbox.md
-                      - LiPo: departments/hardware/electronics/power_systems/lipo.md
-                      - Using High Power Electrical Systems: departments/hardware/electronics/power_systems/wirefire.md
-              - Mechanical:
-                  - Mechanical Overview: departments/hardware/mechanical/mechanical_overview.md
-                  - FT-Hardware CAD Setup: departments/hardware/mechanical/solidworks_setup.md
-                  - 3D Printing Reference: departments/hardware/mechanical/3dprinting.md
-                  - Competition Mount:
-                      - Mount Overview: departments/hardware/mechanical/mount/mount_overview.md
-                      - Brainy: departments/hardware/mechanical/mount/brainy.md
-                      - Lunchy: departments/hardware/mechanical/mount/lunchy.md
-                      - SwitchyJr: departments/hardware/mechanical/mount/power_control.md
-                      - Camera Module: departments/hardware/mechanical/mount/camera_module.md
-                      - LiDAR Mount: departments/hardware/mechanical/mount/lidar.md
-                      - Modem: departments/hardware/mechanical/mount/modem.md
-                      - Reference Sketches: departments/hardware/mechanical/mount/reference_sketches.md
-                      - 2026 DDT Mount Checks: departments/hardware/mechanical/mount/fs_ai_2026_mount_checks.md
+
+  - Archive:
+      - Overview: miscellaneous/archive/index.md
+      - Hardware:
+          - Overview: departments/hardware/overview.md
+          - Electronics:
+              - Electronics Overview: departments/hardware/electronics/electronics_overview.md
+              - Code:
+                  - Libraries:
+                      - FTSerial: departments/hardware/electronics/code/libraries/ftserial.md
+                  - Steering: departments/hardware/electronics/code/steering.md
+                  - Wokwi: departments/hardware/electronics/code/wokwi.md
+              - Jetson Nano: departments/hardware/electronics/jetson_nano.md
+              - Microcontrollers: departments/hardware/electronics/microcontrollers.md
+              - Power Systems:
+                  - Wiring Loom: departments/hardware/electronics/power_systems/wiring_loom.md
+                  - Switchbox: departments/hardware/electronics/power_systems/switchbox.md
+                  - LiPo: departments/hardware/electronics/power_systems/lipo.md
+                  - Using High Power Electrical Systems: departments/hardware/electronics/power_systems/wirefire.md
+          - Mechanical:
+              - Mechanical Overview: departments/hardware/mechanical/mechanical_overview.md
+              - FT-Hardware CAD Setup: departments/hardware/mechanical/solidworks_setup.md
+              - 3D Printing Reference: departments/hardware/mechanical/3dprinting.md
+              - Competition Mount:
+                  - Mount Overview: departments/hardware/mechanical/mount/mount_overview.md
+                  - Brainy: departments/hardware/mechanical/mount/brainy.md
+                  - Lunchy: departments/hardware/mechanical/mount/lunchy.md
+                  - SwitchyJr: departments/hardware/mechanical/mount/power_control.md
+                  - Camera Module: departments/hardware/mechanical/mount/camera_module.md
+                  - LiDAR Mount: departments/hardware/mechanical/mount/lidar.md
+                  - Modem: departments/hardware/mechanical/mount/modem.md
+                  - Reference Sketches: departments/hardware/mechanical/mount/reference_sketches.md
+                  - 2026 DDT Mount Checks: departments/hardware/mechanical/mount/fs_ai_2026_mount_checks.md
 
 extra_css:
   - overrides/styles.css
