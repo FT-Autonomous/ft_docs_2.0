@@ -67,6 +67,27 @@
   display: block;
 }
 
+/* Fit original portraits without taking another crop. */
+.hof-grid--uncropped img {
+  object-fit: contain;
+  border-radius: .25rem;
+  background: var(--md-default-bg-color);
+}
+
+.hof-photo-placeholder {
+  display: inline-grid;
+  place-items: center;
+  width: 120px;
+  height: 120px;
+  padding: .5rem;
+  box-sizing: border-box;
+  border: 1px dashed var(--md-default-fg-color--light);
+  border-radius: .25rem;
+  color: var(--md-default-fg-color--light);
+  font-size: .7rem;
+  overflow-wrap: anywhere;
+}
+
 /* Keep header logo a sane size on all screens */
 .md-header__button.md-logo img {
   height: 1.25rem;   /* tweak: 1.0–1.6rem */
