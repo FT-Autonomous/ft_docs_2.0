@@ -2,6 +2,17 @@
 
 Checked: 29 September 2026. Branch: `conor/halloffame`.
 
+## Page Revisions (3 October 2026)
+
+- The page owner supplied five labelled portraits: Jakub Pyszka, Senan Stanley, Katherine Hardgrave, Daniel Flood and Advik Bahadur. These replace the missing photos and are copied unchanged as PNG assets.
+- Daniel is displayed as Team Coordinator and Katherine as Head of Engineering for 2021/22, following the owner's correction. The earlier descriptions and sources below are retained for historical checking; the page no longer explains equivalence between Captain, CTO and Head of Engineering titles.
+- Harvey's entry is omitted at the owner's request. The earlier election and vacancy announcements are retained below; omission from the page does not establish that he was never appointed.
+- Adam is displayed as Systems Captain. Adam and Joel share the upper row for 2026/27, with Conor centred beneath them.
+- The owner clarified that the CTO role covers both Software and the new Internal Combustion car, and that Systems was created to develop that car's systems.
+- The overview table, source footnotes, committee explanation, season handover paragraphs and maintenance instructions were removed from the public page. Supporting records remain here.
+
+For maintenance, add a season with names, roles and original portraits in `docs/media/hof/`. Keep appointment and photo origins in this record, and retain any handovers in the research history. Do not crop supplied portraits again.
+
 This is the maintenance record for `docs/hall_of_fame.md`, not a complete export of the team's communications. Do not turn an election nomination, an IC role, a current profile title or a photo filename into a historical appointment without supporting evidence.
 
 ## Coverage
@@ -47,17 +58,30 @@ New assets are the downloaded originals, with no additional cropping, resizing o
 | `2026-27-Joel-Jojan.jpg` | [Named portrait on the Formula Trinity website](https://www.formulatrinity.ie/wp-content/uploads/2025/10/AI_Control-Team_Joel-Jojan.jpg) |
 | `2026-27-Adam-Walsh.jpg` | [Named portrait on the Formula Trinity website](https://www.formulatrinity.ie/wp-content/uploads/2025/10/IC_Electronics_Co-Lead_AdamWalsh.jpg) |
 | `2026-27-Conor-Moran.jpg` | [Named portrait on the Formula Trinity website](https://www.formulatrinity.ie/wp-content/uploads/2026/03/AI_Hardware_Conor-Moran-scaled-e1774865017260.jpg) |
+| `Jakub-Pyszka.png` | First portrait supplied and identified by the page owner on 3 October 2026, from his LinkedIn profile |
+| `Senan-Stanley.png` | Second portrait supplied and identified by the page owner on 3 October 2026 |
+| `Katherine-Hardgrave.png` | Third portrait supplied and identified by the page owner on 3 October 2026 |
+| `Daniel-Flood.png` | Fourth portrait supplied and identified by the page owner on 3 October 2026 |
+| `Advik-Bahadur.png` | Fifth portrait supplied and identified by the page owner on 3 October 2026 |
 
 The 2024/25 headshot folder was found through [Carlotta's general announcement](https://formulatrinity.slack.com/archives/CMT82PSG3/p1732041076828149): [main folder](https://drive.google.com/drive/folders/1-CNDM5E5UwrMoMYYtCO81uN_XlIImMvq), [named website-pipeline subfolder](https://drive.google.com/drive/folders/1pwRr2UTiwIvLXKzIPZPZcToU13n_sRzw). The earlier [2023 headshot folder](https://drive.google.com/drive/folders/1Gnynhtnxl_r-oY8Nkomna4NmJEpE2A6C) returned no files in both listing and fetch calls.
 
 ### Checks Still Needed
 
 - Confirm the leaders and exact titles for the initial 2018-2020 project, and whether separate Captain / CTO appointments existed in 2020/21. The founders' identities are supported; the allocation of those titles is not.
-- Obtain confirmed headshots for Katherine Hardgrave, Daniel Flood, Harvey Brezina Conniffe, Jakub Pyszka and Senan Stanley.
-- Confirm a headshot for Advik Bahadur. The Drive file titled `AI_AI Advisor_Advik Bahadur.jpg` (`1XAfC76xa5_Gxci4DgDZtZY7u-QmRtNs5`) visibly has a name badge reading `LEE BORAN`. This conflict was not resolved, so the image is not published or committed as Advik's portrait.
+- The supplied portraits resolve the missing photos for every person now displayed. Harvey is omitted from the page and no longer needs a portrait for this revision.
+- The older Drive file titled `AI_AI Advisor_Advik Bahadur.jpg` (`1XAfC76xa5_Gxci4DgDZtZY7u-QmRtNs5`) visibly has a name badge reading `LEE BORAN`. That file remains excluded; the page now uses the owner's supplied portrait of Advik.
 - The Slack profile connector returned names and profile text but no avatar URLs. Access to Slack through the user browser failed to initialise, including after one reset. The page therefore uses verified team headshots and a member's own portrait, not a claimed export of every Slack avatar.
 
-## Validation
+## Validation (3 October 2026)
+
+- The revised `mkdocs build --strict` passed.
+- All 35 local portrait, image-viewer and page-link targets passed the rendered path and anchor checks.
+- The running preview passed checks at 1440px, 390px and 320px widths: Adam and Joel occupy the upper row, with Conor's portrait centred exactly between theirs on the lower row. No horizontal page overflow was found.
+- All 17 portrait cards loaded, using 14 distinct images with no additional cropping. The five supplied PNG files have matching SHA-256 hashes to the attachments.
+- The public page has no overview table, source footnotes, committee explanation, photo placeholders or Harvey entry. Full-size viewing of the supplied Advik portrait opened at all three widths.
+
+## Earlier Validation (29 September 2026)
 
 - `mkdocs build --strict` passed. The existing Mermaid plugin's CDN check required a network-enabled run.
 - Navigation, the rendered Hall of Fame page and all seven redirects passed the local path, case and anchor checks.

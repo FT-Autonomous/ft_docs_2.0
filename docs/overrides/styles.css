@@ -74,18 +74,13 @@
   background: var(--md-default-bg-color);
 }
 
-.hof-photo-placeholder {
-  display: inline-grid;
-  place-items: center;
-  width: 120px;
-  height: 120px;
-  padding: .5rem;
-  box-sizing: border-box;
-  border: 1px dashed var(--md-default-fg-color--light);
-  border-radius: .25rem;
-  color: var(--md-default-fg-color--light);
-  font-size: .7rem;
-  overflow-wrap: anywhere;
+.hof-grid--leadership {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  justify-items: center;
+}
+
+.hof-grid--leadership figure:last-child {
+  grid-column: 1 / -1;
 }
 
 /* Keep header logo a sane size on all screens */
