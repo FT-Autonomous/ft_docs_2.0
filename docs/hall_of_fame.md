@@ -35,6 +35,8 @@ The Autonomous racing group was founded in 2020 by **Andrew Dai, Jakub Pyszka, S
 </figure>
 </div>
 
+We qualified for and competed in **F1TENTH IROS 2020**, alongside 17 other teams. We then co-hosted the **AI Grand Prix in 2021** with F1TENTH and Riders.ai, bringing together **23 robotics teams** for a virtual autonomous racing competition.
+
 ---
 
 ## 2021/22
@@ -49,6 +51,8 @@ The Autonomous racing group was founded in 2020 by **Andrew Dai, Jakub Pyszka, S
   <figcaption><strong>Katherine Hardgrave</strong>Head of Engineering</figcaption>
 </figure>
 </div>
+
+We finished **4th at the in-person F1TENTH IROS 2021 competition**, then made our first FSUK appearance in 2022 as Ireland's first FS-AI team. We placed **7th in DDT** and **1st in Real World AI**. The wider Formula Trinity team also received the **Allan Staniforth Best Newcomer** and **Racing Pride Aston Martin Diversity and Inclusion** awards.
 
 ---
 
@@ -65,6 +69,8 @@ The Autonomous racing group was founded in 2020 by **Andrew Dai, Jakub Pyszka, S
 </figure>
 </div>
 
+At **FSUK 2023**, we finished **16th overall** and **2nd in Real World AI**. We also moved from camera-only perception to a LiDAR-based solution, using the Livox Avia to detect cones.
+
 ---
 
 ## 2023/24
@@ -79,6 +85,8 @@ The Autonomous racing group was founded in 2020 by **Andrew Dai, Jakub Pyszka, S
   <figcaption><strong>Chinaza Uzoukwu</strong>CTO</figcaption>
 </figure>
 </div>
+
+At **FSUK 2024**, we finished **13th overall** and won the **TATA ELXSI FS-AI Autonomous Design award**, our first win in that event. The design brought camera and LiDAR perception together through sensor fusion. We also picked up the **FS-AI Most Cones Collected** award.
 
 ---
 
@@ -95,6 +103,8 @@ The Autonomous racing group was founded in 2020 by **Andrew Dai, Jakub Pyszka, S
 </figure>
 </div>
 
+At **FSUK 2025**, we finished **12th overall** and **2nd in Autonomous Engineering Design**. After debugging right up to the end of competition, we got the car making a turn. The wider team also received the **Racing Pride Aston Martin Diversity and Inclusion award** again.
+
 ---
 
 ## 2025/26
@@ -110,18 +120,22 @@ The Autonomous racing group was founded in 2020 by **Andrew Dai, Jakub Pyszka, S
 </figure>
 </div>
 
+At **FSUK 2026**, we completed **Trackdrive for the first time: 10 laps without hitting a single cone**. We also completed **Sprint for the first time**, finishing **4th in Trackdrive**, **joint 5th in Sprint** and **5th overall**, our best FS-AI result yet.
+
+We finished **1st in Real World AI**, winning the **Atlassian Williams F1 Team Real World AI award**, and **Gerry Byrne** received the **HAAS Faculty Advisor Outstanding Contribution award**.
+
 ---
 
 ## 2026/27
 
 <div class="hof-grid hof-grid--uncropped hof-grid--leadership">
 <figure>
-  <img src="../media/hof/2026-27-Adam-Walsh.jpg" alt="Adam Walsh, Systems Captain for 2026/27" loading="lazy" width="120" height="120">
-  <figcaption><strong>Adam Walsh</strong>Systems Captain</figcaption>
+  <img src="../media/hof/2026-27-Joel-Jojan.jpg" alt="Joel Jojan, Software Captain for 2026/27" loading="lazy" width="120" height="120">
+  <figcaption><strong>Joel Jojan</strong>Software Captain</figcaption>
 </figure>
 <figure>
-  <img src="../media/hof/2026-27-Joel-Jojan.jpg" alt="Joel Jojan, Autonomous AI Captain for 2026/27" loading="lazy" width="120" height="120">
-  <figcaption><strong>Joel Jojan</strong>AI Captain</figcaption>
+  <img src="../media/hof/2026-27-Adam-Walsh.jpg" alt="Adam Walsh, Systems Captain for 2026/27" loading="lazy" width="120" height="120">
+  <figcaption><strong>Adam Walsh</strong>Systems Captain</figcaption>
 </figure>
 <figure>
   <img src="../media/hof/2026-27-Conor-Moran.jpg" alt="Conor Moran, Autonomous CTO for 2026/27" loading="lazy" width="120" height="120">
@@ -129,4 +143,4 @@ The Autonomous racing group was founded in 2020 by **Andrew Dai, Jakub Pyszka, S
 </figure>
 </div>
 
-The CTO role now covers both Software and the new Internal Combustion car. Systems was created to develop the systems for that car.
+Systems was created to develop the new Internal Combustion car's autonomous systems. The CTO covers both halves of the team: **Software and Systems**.

@@ -1,6 +1,41 @@
 # Autonomous Hall of Fame Research
 
-Checked: 29 September 2026. Branch: `conor/halloffame`.
+Latest revision checked: 4 October 2026. Initial leadership review: 29 September 2026. Branch: `conor/halloffame`.
+
+## Page Revisions (4 October 2026)
+
+- Centre every season's cards within their grid columns, matching the 2026/27 layout. Preserve the original portraits and existing theme.
+- Put Joel first as Software Captain, Adam second as Systems Captain, and Conor centred below as CTO. The first sentence beneath their cards explains why Systems was created; the second states that the CTO covers Software and Systems. These labels and priorities follow the page owner's correction, not the older election terminology retained below.
+- Add short retrospective paragraphs below each season's portraits, using official competition results and contemporary records. Keep source links here, not on the public page.
+- Include the first completed Sprint and Trackdrive in 2026, the cone-free ten-lap run, event placings, overall position and awards. Distinguish the wider team's honours from FS-AI class results.
+- Describe Real World AI wins as first place, not a perfect 100/100: the owner clarified that the winner's score is normalised to 100. Retain award names without presenting the score as a separate achievement.
+
+## Competition Results and Milestones
+
+The FSUK results below are the Autonomous / FS-AI competition results, not the Internal Combustion Class 1 or Concept Class rankings. Academic seasons end with the corresponding summer competition; the September 2021 F1TENTH race belongs to 2021/22. The 2022 published ranking is specifically the DDT table; later rankings use the combined FS-AI overall tables.
+
+| Season | Public-page finding | Supporting record |
+| --- | --- | --- |
+| 2020/21 | Qualified and competed in F1TENTH IROS 2020 with 17 other teams; placing not established | [SCSS recruitment notice, 2 November 2020](https://teaching.scss.tcd.ie/2020/11/02/foruma-trinity-autonomous-is-recruiting/), [Andrew's competition announcement naming R2DU and its first-round opponent](https://formulatrinity.slack.com/archives/C018H460279/p1603353258001300), [qualification and simulator-replay thread](https://formulatrinity.slack.com/archives/C018H460279/p1603221410000500) |
+| 2020/21 | Co-hosted AI Grand Prix 2021 with F1TENTH and Riders.ai; 23 robotics teams | [Organiser's June retrospective](https://webflow.riders.ai/en-blog/what-happened-in-riders-in-june), [contemporary organising recognition](https://formulatrinity.slack.com/archives/C018H460279/p1622922859001200) |
+| 2021/22 | 4th in the in-person F1TENTH IROS 2021 race | [Official results](https://iros2021.f1tenth.org/results.html), [29 September race schedule](https://iros2021.f1tenth.org/race_schedule.html) |
+| 2021/22 | First FSUK appearance in 2022; 7th DDT, 1st Real World AI | [Official DDT results](https://www.imeche.org/docs/default-source/1-oscar/formula-student/2022/results/fsai-2022-ddt-results-v2.pdf?sfvrsn=2), [Trinity's competition report](https://www.tcd.ie/news_events/articles/formula-trinity-takes-silverstone-by-storm/) |
+| 2021/22 | Wider team: Best Newcomer and Racing Pride Aston Martin Diversity and Inclusion awards | [IMechE 2022 award winners](https://www.imeche.org/events/formula-student/previous-events/2022-award-winners) |
+| 2022/23 | FSUK 2023: 16th overall, 2nd Real World AI | [Official overall spreadsheet](https://www.imeche.org/docs/default-source/1-oscar/formula-student/2023/Results/fsai_uk_2023_overall_results.xlsx?sfvrsn=2) |
+| 2023/24 | FSUK 2024: 13th overall, Autonomous Design winner, Most Cones Collected award | [Official overall results](https://www.imeche.org/docs/default-source/1-oscar/formula-student/2024/awards/fsai_uk_2024_overall_results.pdf?sfvrsn=2), [IMechE awards](https://www.imeche.org/events/formula-student/previous-events/2024-award-winners), [team awards record](https://www.formulatrinity.ie/awards/), [Advik's outgoing handover](https://formulatrinity.slack.com/archives/C018H460279/p1723280400506379) |
+| 2024/25 | FSUK 2025: 12th overall, 2nd Autonomous Engineering Design; car made a turn after competition debugging | [Official overall results](https://www.imeche.org/docs/default-source/1-oscar/formula-student/2025/results/fsai_uk_2025_overall.pdf?sfvrsn=2), [Cleavon's outgoing handover](https://formulatrinity.slack.com/archives/C018H460279/p1753128501535769) |
+| 2024/25 | Wider team: Racing Pride Aston Martin Diversity and Inclusion award again | [Team's 2025 awards record](https://www.formulatrinity.ie/awards/) |
+| 2025/26 | FSUK 2026: first completed Sprint and Trackdrive, ten laps with no cones hit, 4th Trackdrive, joint 5th Sprint, 5th overall | [Official overall results](https://www.imeche.org/docs/default-source/1-oscar/formula-student/2026/results/fsai_uk_2026_result_v3.pdf), [SCSS competition report](https://www.tcd.ie/scss/news/2026/silverstone-2026/), [contemporary event placings](https://formulatrinity.slack.com/archives/C018H460279/p1784562243087579), [cone-free run report](https://formulatrinity.slack.com/archives/C018H460279/p1784585790126199) |
+| 2025/26 | Real World AI winner; Gerry Byrne received Faculty Advisor Outstanding Contribution award | [IMechE 2026 award winners](https://www.imeche.org/events/formula-student/previous-events/2026-award-winners) |
+
+### Interpretation and Evidence Limits
+
+- The official 2023 XLSX was downloaded and read as data, without executing content. Trinity's row is position 16, car 70, total 165.2 including a -150 penalty; its Real World score of 87.4 is second to Edinburgh's 100. The results-index link is labelled PDF but serves XLSX. Do not substitute the IC team's position from the team awards page.
+- The 2024 official table gives Trinity 150 design points, the highest score; the team's awards record names the TATA ELXSI award. The 2025 table gives 144 design points, second behind Edinburgh's 150. Neither table records a completed scored dynamic event for Trinity; getting the car to turn in 2025 is not presented as a completed Sprint or Trackdrive.
+- The 2026 SCSS report says 5th in Sprint; Conor's contemporary result announcement specifies tied 5th. The page uses joint 5th. The official results and award list confirm 5th overall and 1st Real World AI. Gerry's award is a named faculty-advisor honour, not another driving-event win.
+- The wider team's 2025 Diversity and Inclusion award is reported on the team's own awards page; it was not independently matched in the IMechE 2025 award list. The page does not attribute any IC or Concept Class placing to Autonomous.
+- The perception milestones come from the existing `docs/departments/perception/overview.md`: camera-only in 2021/22, Livox Avia LiDAR in 2022/23, camera/LiDAR fusion in 2023/24. That department's documentation is unchanged.
+- The IROS 2021 results table was available through the official site's search index, although a direct page open failed. The IROS 2020 site could not be opened and bounded searches did not establish a placing. Participation is supported by the SCSS notice and contemporary messages; no rank is invented. These searches do not prove that every historical competition or milestone has been recovered.
 
 ## Page Revisions (3 October 2026)
 
@@ -73,7 +108,14 @@ The 2024/25 headshot folder was found through [Carlotta's general announcement](
 - The older Drive file titled `AI_AI Advisor_Advik Bahadur.jpg` (`1XAfC76xa5_Gxci4DgDZtZY7u-QmRtNs5`) visibly has a name badge reading `LEE BORAN`. That file remains excluded; the page now uses the owner's supplied portrait of Advik.
 - The Slack profile connector returned names and profile text but no avatar URLs. Access to Slack through the user browser failed to initialise, including after one reset. The page therefore uses verified team headshots and a member's own portrait, not a claimed export of every Slack avatar.
 
-## Validation (3 October 2026)
+## Validation (4 October 2026)
+
+- The final `mkdocs build --strict` passed after the Real World AI wording correction. An earlier attempt stopped on a temporary Mermaid CDN DNS-resolution warning; a retry and the final build both completed without that warning.
+- The local preview passed checks at 1440px, 390px and 320px widths: every card is centred within its grid column, Joel precedes Adam, and Conor is centred between them on the lower row. Ordinary pairs stack naturally at the narrowest width. No horizontal overflow was found.
+- All 17 cards loaded their 14 distinct original portraits with `object-fit: contain`. All 15 distinct local image/page targets in the article passed HTTP and applicable anchor checks at each width; external destinations were not tested by this local check.
+- Desktop and mobile screenshots were inspected. The page includes the revised titles, competition paragraphs and cone-free Trackdrive milestone, with no 100/100 claim. Portrait assets and other departments' documentation are unchanged.
+
+## Earlier Validation (3 October 2026)
 
 - The revised `mkdocs build --strict` passed.
 - All 35 local portrait, image-viewer and page-link targets passed the rendered path and anchor checks.

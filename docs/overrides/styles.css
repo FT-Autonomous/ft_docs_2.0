@@ -40,6 +40,7 @@
   grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 0.9rem 1rem;
   align-items: start;
+  justify-items: center;
   margin: 0.5rem 0 1.25rem;
 }
 
@@ -76,7 +77,6 @@
 
 .hof-grid--leadership {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  justify-items: center;
 }
 
 .hof-grid--leadership figure:last-child {
