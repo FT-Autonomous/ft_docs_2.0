@@ -372,7 +372,7 @@ if errorlevel 1 goto :ASK_INSTALLER
 echo ============================================================
 echo              INSTALLATION INCOMPLETE
 echo ============================================================
-echo The setup process can run install.sh which will install 
+echo The setup process can run setup.sh which will install 
 echo missing components of the suite.
 echo.
 echo No Formula Trinity files have been changed yet.
@@ -407,7 +407,7 @@ echo Options:
 echo.
 echo     [1] Exit
 echo.
-echo     [2] Run install.sh anyway
+echo     [2] Run setup.sh anyway
 echo.
 
 choice /C 12 /N /M "Select an option [1-2]: "
@@ -443,7 +443,7 @@ echo.
 echo ============================================================
 echo                FORMULA TRINITY SUITE
 echo ============================================================
-echo The Formula Trinity install.sh script will now be run within
+echo The Formula Trinity setup.sh script will now be run within
 echo the wsl and it will download the Formula Trinity suite.
 echo.
 
