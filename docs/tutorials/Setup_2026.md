@@ -2,7 +2,7 @@
 
 ## HOW TO USE
 
-- Download [FormulaTrinitySetup.bat](/media/downloads/FormulaTrinitySetup.bat), run it, and follow the on-screen instructions.
+- Download [FormulaTrinitySetup.bat](media/downloads/FormulaTrinitySetup.bat), run it, and follow the on-screen instructions.
 - Please contact Muirinn if there are any issues.
 
 ## Target
