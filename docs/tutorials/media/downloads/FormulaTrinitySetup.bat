@@ -45,7 +45,7 @@ echo.
 echo This installer will check your computer before making
 echo any changes.
 echo.
-echo If the Formula Trinity suit is already installed, you will 
+echo If the Formula Trinity suite is already installed, you will 
 echo be given the option to exit without modifying anything.
 echo.
 echo ============================================================
@@ -207,7 +207,7 @@ echo [OK] ~/ft directory found
 :: ============================================================
 
 echo.
-echo [5/6] Checking existing Formula Trinity suite installation...
+echo [6/6] Checking existing Formula Trinity suite installation...
 echo.
 
 :: ------------------------------------------------------------
