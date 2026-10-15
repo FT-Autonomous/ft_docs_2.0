@@ -156,6 +156,7 @@ nav: # This is the structure of the sidebar
       - Other Relevant Sites: resources/relevant.md
 
   - Tutorials:
+      - Setup Guide 2026: tutorials/Setup_2026.md
       - Getting Started Guide: tutorials/Getting_started.md
       - Onboarding Videos: tutorials/onboarding_videos.md
       - Cutting Bags Down to Size: tutorials/cutting_bags.md
