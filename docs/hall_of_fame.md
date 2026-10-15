@@ -50,6 +50,10 @@ We qualified for and competed in **F1TENTH IROS 2020**, alongside 17 other teams
   <img src="../media/hof/Katherine-Hardgrave.png" alt="Katherine Hardgrave, Autonomous Head of Engineering for 2021/22" loading="lazy" width="120" height="120">
   <figcaption><strong>Katherine Hardgrave</strong>Head of Engineering</figcaption>
 </figure>
+<figure>
+  <img src="../media/hof/2021-22-David-Nugent.jpg" alt="David Nugent, Autonomous CTO for 2021/22" loading="lazy" width="120" height="120">
+  <figcaption><strong>David Nugent</strong>Chief Technical Officer</figcaption>
+</figure>
 </div>
 
 We finished **4th at the in-person F1TENTH IROS 2021 competition**, then made our first FSUK appearance in 2022 as Ireland's first FS-AI team. We placed **7th in DDT** and **1st in Real World AI**. The wider Formula Trinity team also received the **Allan Staniforth Best Newcomer** and **Racing Pride Aston Martin Diversity and Inclusion** awards.
