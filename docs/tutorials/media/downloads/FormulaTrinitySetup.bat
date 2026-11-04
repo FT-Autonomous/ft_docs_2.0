@@ -448,7 +448,7 @@ echo the wsl and it will download the Formula Trinity suite.
 echo.
 
 :: uses Jakubs code assuming its in FT-FSAI-Core
-wsl.exe -d Ubuntu-22.04 -- bash -c "cd ~/ft/FT-FSAI-Core && ls && bash setup.sh"
+wsl.exe -d Ubuntu-22.04 -- bash -c "cd ~/ft/FT-FSAI-Core/setup/wsl && ls && bash setup.sh"
 
 :: ============================================================
 :: Installation successful
@@ -480,13 +480,6 @@ echo Choose and launch a circuit in EUFS. Keep that terminal running.
 echo.
 echo Termial 2:
 echo ros2 launch ft_launch system_sim.launch.py
-echo.
-echo Terminal 3, to select Autocross on a suitable circuit:
-echo ros2 service call /ros_can/set_mission eufs_msgs/srv/SetCanState '{ami_state: 13}'
-echo ros2 topic echo /ros_can/state --once
-echo.
-echo Autocross is mission 13; driving is AS state 2. This uses the simulator's
-echo mission service rather than publishing a fake driving state.
 echo.
 echo ============================================================
 echo.
