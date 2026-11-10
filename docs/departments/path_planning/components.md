@@ -1,4 +1,5 @@
 # Path Planning Components
+![Path-Planning Component Diagram](media/PathPlanning.svg)
 
 ## Cone Sorting
 
