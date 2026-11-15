@@ -51,7 +51,7 @@ The Path Planning mini simulator is a light weight mini simulator that allows qu
 3. Run path_planner_sim.py, this will read the latest contents of the track_data.npz file and the mini sim should be operational.
 
 ### Inputs
-path_planner_sim.py takes no command-line arguments. Its input is the track_data.npz file created by trackbuilder.py, which must be in the same directory as path_planner_sim.py. 
+path_planner_sim.py takes no command-line arguments. Its input is the track_data.npz file created by trackbuilder.py, which must be in the same directory as path_planner_sim.py.
 
 track_data.npz contains four named arrays, written by trackbuilder.py’s np.savez() call and read back by name with np.load(). Every point is  (x, y), in metres in the global (track) frame:
 
@@ -64,6 +64,7 @@ Hard-coded parameters include: 10 m lookahead, 0.5 m moved per frame, 0.1 m path
 
 ### Steps
 path_planner_py() runs once and sets everything up, including:
+
 - creating a PathPlanner instance
 - loading the track from track_data.npz
 - converting every cone position into a Cone object in cone_list
@@ -74,6 +75,7 @@ path_planner_py() runs once and sets everything up, including:
 
 After the window opens, all per-frame work happens in update(). path_planner_py() resumes only when the window is closed, and then returns the animation object.
 update() is ran every 100 ms. Each call to update() performs one simulation step:
+
 - _transform_visible_cones() keeps cones within 10 m that are in front of the vehicle and converts them into the vehicle frame (x forward, y left). Those cones are passed to planner.plan().
 - _build_match_artifacts() converts each matched yellow/blue pair back to the global frame. update() then draws them as magenta lines and highlights the matched cones.
 - update()then removes path points within 0.1 m of the vehicle or behind it, converts the rest to the global frame, and draws them starting from the vehicle’s position.
