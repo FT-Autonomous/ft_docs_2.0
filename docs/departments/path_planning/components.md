@@ -39,6 +39,53 @@ The accepted matches are then used by PathPlanner to calculate centrepoints and 
 
 **Implementation:** `ft_euclid/ConeSorter.py`
 
+## Cone Matching
+
+![ConeMatcher Component Diagram](media/ConeMatcher.svg)
+
+[ConeMatcher Component Diagram on IcePanel](https://app.icepanel.io/landscapes/W3k5yfoNP87dJQHdxNC2/versions/latest/diagrams/editor?diagram=BIOdfEZEgK&model=j8TPE0eipC)
+
+The **ConeMatcher** is the second processing component of the Path Planning algorithm. `PathPlanner.plan()` calls `ConeMatcher.match_cones()` with the yellow and blue arrays returned by `ConeSorter.sort_cones()`.
+
+Its main purpose is to pair yellow and blue cones that sit across the track from each other. Pairing uses distance from the car: each yellow cone is matched to the blue cone, within a small rank window, whose distance from the car is closest to its own. A Euclidean width check then drops pairs whose separation is at least the width threshold. `PathPlanner` turns the accepted pairs into midpoints for the centreline.
+
+### Inputs
+
+`PathPlanner.plan()` constructs the matcher as `ConeMatcher(index_threshold=3, width_threshold=path_width)`. The `path_width` argument defaults to `5.75`. Passing `None` leaves the width unset so the first `match_cones()` call can derive it.
+
+The constructor stores those two arguments as:
+
+- **Index threshold:** `MATCH_INDEX_THRESHOLD`. How many ranks either side of the current cone to search. The yellow and blue arrays arrive sorted by distance from the car, so the search stays inside this window.
+- **Width threshold:** `MAX_TRACK_WIDTH_THRESHOLD`. The maximum Euclidean distance allowed between a matched yellow cone and blue cone. `None` means the threshold has not been set yet.
+
+The `match_cones()` method takes four arrays, in this order:
+
+- **Sorted yellow distances:** Distance of each yellow cone from the car, nearest first.
+- **Sorted blue distances:** Distance of each blue cone from the car, nearest first.
+- **Sorted yellow cones:** Yellow `Cone` objects in that same order. Positions are read from `cone.pos`.
+- **Sorted blue cones:** Blue `Cone` objects in that same order.
+
+### Steps
+
+1. **Resolve the track width:** When `MAX_TRACK_WIDTH_THRESHOLD` is `None` and both colours are present, `calculate_path_width()` sets it to the Euclidean distance between the first yellow cone and the first blue cone, plus a `0.5` m margin. With ConeSorter's nearest-first order, those are the nearest yellow cone and the nearest blue cone. When the threshold is `None` and either colour is missing, `match_cones()` returns no matches and leaves the threshold as `None`.
+2. **Align the distance arrays:** When the two distance arrays have different lengths, `make_array_same_lengths()` from `mathUtils.py` pads the shorter one. `difference()` pads again if the lengths still differ, so the shift comparison can run element by element.
+3. **Compare distance ranks:** `difference()` takes the absolute difference between each yellow distance-from-car and the blue distances at every index offset from `-MATCH_INDEX_THRESHOLD` to `+MATCH_INDEX_THRESHOLD`, including the aligned comparison at offset `0`.
+4. **Pick the closest rank:** `minimum_arg()` chooses, for each yellow index `i`, the offset whose absolute difference is smallest. The candidate blue index is `i + offset`. Offset `0` keeps the same rank, a positive offset selects a blue cone further down the sorted list, and a negative offset selects one further up. Each yellow index is chosen independently, so the same blue index can be selected for more than one yellow cone.
+5. **Apply the width gate:** The pair is kept only when both indices exist in the cone arrays and `euclidean_distance()` between the two `cone.pos` values is less than `MAX_TRACK_WIDTH_THRESHOLD`. Any other candidate is omitted. `place_virtual_cones()` is an empty stub, and `match_cones()` does not call it.
+
+### Outputs
+
+The `match_cones()` method returns two values:
+
+| Output | Description |
+|---|---|
+| `matches` | NumPy `int` array of shape `(N, 2)`. Each row is `[yellow_index, blue_index]` into the sorted cone arrays. No accepted pairs gives shape `(0, 2)`. |
+| `track_width` | `MAX_TRACK_WIDTH_THRESHOLD` after this call. That is the value passed into the constructor, or the derived nearest-cone distance plus `0.5` m when the constructor value was `None`. It stays `None` when the width could not be derived. |
+
+`PathPlanner.plan()` passes `matches` to `find_match_midpoints()`, which takes the midpoint of the line between each accepted yellow cone and blue cone. Those midpoints are the yellow-blue centrepoints. `track_width` is returned from `plan()` with the path, and it is also the width used when pairing big-orange start-gate cones.
+
+**Implementation:** `ft_euclid/ConeMatcher.py`
+
 ## Mini Simulator
 
 The Path Planning mini simulator is a light weight mini simulator that allows quick checks of algorithm performance before testing with the full FT stack in EUFS. It runs quickly and only needs track_data.npz and the ft_euclid planner code. It's main purpose is to act as a unit test for path planning.
