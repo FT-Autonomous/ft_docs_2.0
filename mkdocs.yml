@@ -102,6 +102,7 @@ nav: # This is the structure of the sidebar
       - Path Planning:
             - Overview: departments/path_planning/overview.md
             - Theory: departments/path_planning/theory.md
+            - Components: departments/path_planning/components.md
       - Control:
             - Overview: departments/control/overview.md
             - Theory: departments/control/theory.md
