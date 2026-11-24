@@ -93,6 +93,7 @@ nav: # This is the structure of the sidebar
             - Overview: departments/perception/overview.md
             - Theory: departments/perception/theory.md
             - LiDAR Only Solution: departments/perception/clustering_algo.md
+            - YOLO Capture Node: departments/perception/yolo_capture_node.md
             - Calibration: departments/perception/calibration.md
             - Debugging: departments/perception/debugging.md
       - State Estimation:
