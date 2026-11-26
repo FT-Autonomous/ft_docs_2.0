@@ -99,3 +99,21 @@
 @media (min-width: 960px) {
   .md-header__button.md-logo img { height: 1.4rem; }
 }
+
+/* Embedded IcePanel diagrams (live, interactive) */
+.icepanel-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: .4rem;
+  overflow: hidden;
+}
+
+.icepanel-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}

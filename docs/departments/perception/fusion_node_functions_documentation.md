@@ -4,7 +4,19 @@
 **ROS 2 Node Name:** `Sensor_Fusion_Node` (implemented by `Wrapper`, lines 75–605)  
 **IcePanel Flow Diagram:** [https://s.icepanel.io/0EhhOOxmUeQQ74/0HPf](https://s.icepanel.io/0EhhOOxmUeQQ74/0HPf)
 
-![IcePanel Flow Diagram](media/fusion_node_flow.png)
+=== "Interactive (IcePanel)"
+
+    <div class="icepanel-embed">
+      <iframe
+        src="https://s.icepanel.io/0EhhOOxmUeQQ74/0HPf"
+        title="Sensor Fusion Node flow (IcePanel)"
+        loading="lazy"
+        allowfullscreen></iframe>
+    </div>
+
+=== "Static snapshot"
+
+    ![IcePanel Flow Diagram](media/fusion_node_flow.png)
 
 ---
 
